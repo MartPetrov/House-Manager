@@ -5,7 +5,10 @@ import java.io.IOException;
 public interface PeopleService {
 
 
-    void importPeople() throws IOException;
+    String importPeople(String firstName,String lastName,String phoneNumber,String apartmentNumber);
+
+
+    String findAllPeople();
 
 }
 
