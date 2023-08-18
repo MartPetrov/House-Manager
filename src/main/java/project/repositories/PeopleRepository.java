@@ -16,4 +16,8 @@ public interface PeopleRepository extends JpaRepository<People,Long> {
             value = "SELECT p FROM People as p " +
                     "WHERE p.first_name = ?1 and p.second_name = ?2")
    People findPeopleByFirst_nameAndSecond_name(String firstName,String secondName);
+
+
+    @Override
+    void deleteAll();
 }

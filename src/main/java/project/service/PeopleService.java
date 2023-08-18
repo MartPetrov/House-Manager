@@ -1,14 +1,12 @@
 package project.service;
 
-import java.io.IOException;
-
 public interface PeopleService {
 
-
-    String importPeople(String firstName,String lastName,String phoneNumber,String apartmentNumber);
-
+    String importPeople(String firstName,String lastName,Integer phoneNumber,Integer apartmentNumber);
 
     String findAllPeople();
+
+    String deleteAllPeople(String password);
 
 }
 
