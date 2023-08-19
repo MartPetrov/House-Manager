@@ -26,7 +26,7 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public String findAllBill() {
+    public String findAllBillsForThisYear() {
         List<Bill> allBills =
                 this.billsRepository.findAll().stream().filter(bill -> bill.getDate().endsWith(String.valueOf(Year.now().getValue())))
                         .sorted(Comparator.comparingInt(Bill::getMonth))

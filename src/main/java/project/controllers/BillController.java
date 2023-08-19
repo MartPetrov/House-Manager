@@ -25,11 +25,11 @@ public class BillController {
     //         http://localhost:8080/importBill?firstNumber=&secondNumber=&date=&sum=&month=
 
 
-    @RequestMapping(value = "/findAllBills")
-    public @ResponseBody String findAllBills() {
-        return this.billService.findAllBill();
+    @RequestMapping(value = "/findAllBillsForThisYear")
+    public @ResponseBody String findAllBillsForThisYear() {
+        return this.billService.findAllBillsForThisYear();
     }
-    //           http://localhost:8080/findAllBills
+    //           http://localhost:8080/findAllBillsForThisYear
 
     @RequestMapping(value = "/sumForYear",params = {"year"})
     public @ResponseBody String sumForYear(@RequestParam(value = "year") String year) {
