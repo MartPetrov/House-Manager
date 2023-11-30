@@ -1,6 +1,7 @@
 package project.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name = "peoples")
 public class People {
 
@@ -32,7 +34,7 @@ public class People {
     private String second_name;
 
     @Column
-    private Integer phoneNumber;
+    private String phoneNumber;
 
     @Column
     @NonNull

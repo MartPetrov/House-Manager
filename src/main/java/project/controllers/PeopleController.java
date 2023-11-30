@@ -17,7 +17,7 @@ public class PeopleController {
     @PostMapping(value = "/importPeople", params = {"firstName", "secondName", "phoneNumber", "apartmentNumber"})
     public @ResponseBody String importPeople(@RequestParam(value = "firstName") String firstName,
                                              @RequestParam(value = "secondName") String secondName,
-                                             @RequestParam(value = "phoneNumber") Integer phoneNumber,
+                                             @RequestParam(value = "phoneNumber") String phoneNumber,
                                              @RequestParam(value = "apartmentNumber") Integer apartmentNumber) {
         return this.peopleService.importPeople(firstName, secondName, phoneNumber, apartmentNumber);
     }

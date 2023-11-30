@@ -17,11 +17,13 @@ public class PeopleServiceImpl implements PeopleService {
     private final PeopleRepository peopleRepository;
 
     @Override
-    public String importPeople(String firstName, String lastName, Integer phoneNumber, Integer apartmentNumber) {
+    public String importPeople(String firstName, String lastName, String phoneNumber, Integer apartmentNumber) {
         People newPeople = new People(firstName, lastName, apartmentNumber);
         People byFirstNameAndSecondName = peopleRepository.findPeopleByFirst_nameAndSecond_name(firstName, lastName);
-        if (phoneNumber != null) {
+        if (phoneNumber != null && phoneNumber.startsWith("359")) {
             newPeople.setPhoneNumber(phoneNumber);
+        } else {
+            throw new IllegalArgumentException("Wrong Phone Number");
         }
         if (byFirstNameAndSecondName == null) {
             this.peopleRepository.save(newPeople);
