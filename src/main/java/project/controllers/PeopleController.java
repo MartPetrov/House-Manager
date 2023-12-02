@@ -7,7 +7,7 @@ import project.service.PeopleService;
 @RestController
 public class PeopleController {
 
-    private PeopleService peopleService;
+    private final PeopleService peopleService;
 
     @Autowired
     public PeopleController(PeopleService peopleService) {
