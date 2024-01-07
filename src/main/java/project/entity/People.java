@@ -68,10 +68,6 @@ public class People implements Serializable {
 
     @Override
     public String toString() {
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(first_name).append(" ").append(second_name).append(System.lineSeparator())
-//                .append("-------").append("ApartmentNumber ").append(apartmentNumber).append(System.lineSeparator())
-//                .append("--------------").append("Phone number: ").append(phoneNumber).append(System.lineSeparator());
         return new Gson().toJson(this);
     }
 

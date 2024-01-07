@@ -1,0 +1,22 @@
+body {
+    background-color: #e6f7eb;
+    background-image: radial-gradient(circle at center center, #dff745, #e6f7eb), repeating-radial-gradient(circle at center center, #dff745, #dff745, 21px, transparent 42px, transparent 21px);
+}
+
+.table-dark{
+    border: 1px solid;
+    text-align: center;
+    background: linen;
+}
+
+.box {
+    border: 1px solid chartreuse;
+    border-radius: 10em;
+}
+
+
+a {
+    text-decoration: none;
+    color: #444444;
+}
+

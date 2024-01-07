@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>House-Manager</title>
-    <link th:href="@{/css/people.css}" rel="stylesheet"/>
-    <link th:href="@{/css/mainPage.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bills.css}" rel="stylesheet"/>
 </head>
 <body>
 <a href="http://localhost:8080">Home</a>
 <table id="table" class="table table-dark">
     <thead>
-    <tr>
+    <tr id="headerRow">
         <th scope="col">date</th>
         <th scope="col">month</th>
         <th scope="col">firstNumber</th>
@@ -19,17 +18,15 @@
     </tr>
     </thead>
     <tbody>
-<!--    <tr th:each="bill: ${getAllBills}">-->
-    <tr th:each="bill: ${getAllBills}">
-        <td th:text="${bill.date}"/>
-        <td th:text="${bill.month}"/>
-        <td th:text="${bill.firstNumber}"/>
-        <td th:text="${bill.secondNumber}"/>
-        <td th:text="${bill.sum}"/>
+    <tr th:each="bill: ${getAllBills}" class="entry" >
+        <td th:text="${bill.date}" class="box"/>
+        <td th:text="${bill.month}" class="box"/>
+        <td th:text="${bill.firstNumber}" class="box"/>
+        <td th:text="${bill.secondNumber}" class="box"/>
+        <td th:text="${bill.sum}" class="box"/>
     </tr>
     </tbody>
 </table>
 
-<!--<script src="../main.js"></script>-->
 </body>
 </html>

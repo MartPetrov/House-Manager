@@ -21,6 +21,6 @@ public class BillControllerWeb {
     @GetMapping("/bills")
     public String findAllBills(Model model) {
         model.addAttribute("getAllBills",billService.findAllBillsWeb());
-        return "/bills/bills.html";
+        return "bills.html";
     }
 }

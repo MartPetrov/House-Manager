@@ -3,3 +3,9 @@ table, th, td {
     border: 1px solid;
     text-align: center;
 }
+
+
+a {
+    text-decoration: none;
+    color: #444444;
+}

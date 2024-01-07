@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>House-Manager</title>
     <link th:href="@{/css/people.css}" rel="stylesheet"/>
-    <link th:href="@{/css/mainPage.css}" rel="stylesheet"/>
+    <script th:src="@{../static/js/people.js}"></script>
 </head>
-<body>
+<body onload="loadPeople()">
 <a href="http://localhost:8080">Home</a>
 <table id="table" class="table table-dark">
     <thead>
@@ -20,19 +20,17 @@
         <th scope="col">importMoney</th>
     </tr>
     </thead>
-    <tbody>
-    <tr th:each="person: ${getAllPeople}">
-        <td th:text="${person.first_name}"/>
-        <td th:text="${person.second_name}"/>
-        <td th:text="${person.phoneNumber}"/>
-        <td th:text="${person.apartmentNumber}"/>
-        <td th:text="${person.importMoney}"/>
-        <td th:text="${person.expensesMoney}"/>
-        <td th:text="${person.importMoney}"/>
-    </tr>
+    <tbody id="tbody">
+<!--    <tr th:each="person: ${getAllPeople}">-->
+<!--        <td th:text="${person.first_name}"/>-->
+<!--        <td th:text="${person.second_name}"/>-->
+<!--        <td th:text="${person.phoneNumber}"/>-->
+<!--        <td th:text="${person.apartmentNumber}"/>-->
+<!--        <td th:text="${person.importMoney}"/>-->
+<!--        <td th:text="${person.expensesMoney}"/>-->
+<!--        <td th:text="${person.importMoney}"/>-->
+<!--    </tr>-->
     </tbody>
 </table>
-
-<!--<script src="../main.js"></script>-->
 </body>
 </html>

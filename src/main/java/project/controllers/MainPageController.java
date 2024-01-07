@@ -9,6 +9,6 @@ public class MainPageController {
 
     @GetMapping()
     public String homePage(Model model) {
-        return "/MainPage/mainPage.html";
+        return "mainPage.html";
     }
 }
