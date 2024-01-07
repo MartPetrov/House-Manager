@@ -1,13 +1,12 @@
-package project.controllers;
+package project.restApiControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import project.service.BillService;
-import project.service.PeopleService;
 
 @RestController
 public class BillController {
-    private BillService billService;
+    private final BillService billService;
 
     @Autowired
     public BillController(BillService billService) {
@@ -27,13 +26,13 @@ public class BillController {
 
     @RequestMapping(value = "/findAllBillsForThisYear")
     public @ResponseBody String findAllBillsForThisYear() {
-        return this.billService.findAllBillsForThisYear();
+        return this.billService.findAllBillsForThisYearRest();
     }
     //           http://localhost:8080/findAllBillsForThisYear
 
     @RequestMapping(value = "/sumForYear",params = {"year"})
     public @ResponseBody String sumForYear(@RequestParam(value = "year") String year) {
-        return this.billService.calculateAllBillsForYears(year);
+        return this.billService.calculateAllBillsForYearsRest(year);
     }
     //           http://localhost:8080/sumForYear?year=
 }

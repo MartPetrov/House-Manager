@@ -1,5 +1,6 @@
 package project.entity;
 
+import com.google.gson.Gson;
 import lombok.*;
 
 import javax.persistence.*;
@@ -45,11 +46,15 @@ public class Bill {
         this.month = month;
     }
 
-    @Override
-    public String toString() {
+    public String toStringRest() {
         return "Bill For month: " + getMonth() + System.lineSeparator() +
                 "-With number: " + getFirstNumber() + " / " + "from date: " + getDate() + System.lineSeparator() +
                 "--And " + getSecondNumber() + " / " + "from date: " + getDate() + System.lineSeparator() +
                 "---For sum: " + String.format("%.2f", getSum()) + System.lineSeparator();
+    }
+
+ @Override
+    public String toString() {
+        return new Gson().toJson(this);
     }
 }

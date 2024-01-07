@@ -33,15 +33,24 @@ public class PeopleServiceImpl implements PeopleService {
     }
 
     @Override
-    public String findAllPeople() {
-        List<People> allPeopleCompareApartment =
-                this.peopleRepository.findAll().stream()
+    public List<People> findAllPeople() {
+             return   this.peopleRepository.findAll().stream()
                         .sorted(Comparator.comparingInt(People::getApartmentNumber))
                         .toList();
+    }
+
+    @Override
+    public String findAllPeopleRest() {
+        List<People> allPeopleCompareApartment =
+                this.peopleRepository.findAll().stream()
+                .sorted(Comparator.comparingInt(People::getApartmentNumber))
+                .toList();
         StringBuilder sb = new StringBuilder();
-        allPeopleCompareApartment.forEach(sb::append);
+        allPeopleCompareApartment.forEach(p -> sb.append(p.toStringRest()));
         return sb.toString();
     }
+
+
 
     @Override
     public String deleteAllPeople(String password) {

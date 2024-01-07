@@ -1,11 +1,13 @@
 package project.entity;
 
+import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
@@ -13,7 +15,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @Table(name = "peoples")
-public class People {
+public class People implements Serializable {
 
     public People(String first_name, String second_name, Integer apartmentNumber) {
         this.first_name = first_name;
@@ -66,6 +68,14 @@ public class People {
 
     @Override
     public String toString() {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(first_name).append(" ").append(second_name).append(System.lineSeparator())
+//                .append("-------").append("ApartmentNumber ").append(apartmentNumber).append(System.lineSeparator())
+//                .append("--------------").append("Phone number: ").append(phoneNumber).append(System.lineSeparator());
+        return new Gson().toJson(this);
+    }
+
+    public String toStringRest() {
         StringBuilder sb = new StringBuilder();
         sb.append(first_name).append(" ").append(second_name).append(System.lineSeparator())
                 .append("-------").append("ApartmentNumber ").append(apartmentNumber).append(System.lineSeparator())

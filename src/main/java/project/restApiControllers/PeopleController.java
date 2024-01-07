@@ -1,4 +1,4 @@
-package project.controllers;
+package project.restApiControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,11 +24,11 @@ public class PeopleController {
     //         http://localhost:8080/importPeople?firstName=Ivan&secondName=Ivanov&phoneNumber=09248421841&apartmentNumber=6
 
 
-    @RequestMapping(value = "/findAllPeople")
+    @RequestMapping(value = "/findAllPeopleRest")
     public @ResponseBody String findAllPeople() {
-       return this.peopleService.findAllPeople();
+       return this.peopleService.findAllPeopleRest();
     }
-    //           http://localhost:8080/findAllPeople
+    //           http://localhost:8080/findAllPeopleRest
 
     @PostMapping(value = "/deleteAllPeople", params = {"Password"})
     public @ResponseBody String deleteAllPeople(@RequestParam(value = "Password") String password ) {

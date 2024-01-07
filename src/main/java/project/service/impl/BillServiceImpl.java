@@ -26,24 +26,37 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public String findAllBillsForThisYear() {
+    public String findAllBillsForThisYearRest() {
         List<Bill> allBills =
                 this.billsRepository.findAll().stream().filter(bill -> bill.getDate().endsWith(String.valueOf(Year.now().getValue())))
                         .sorted(Comparator.comparingInt(Bill::getMonth))
                         .toList();
         StringBuilder sb = new StringBuilder();
-        allBills.forEach(sb::append);
+        allBills.forEach(b -> sb.append(b.toStringRest()));
         return sb.toString();
     }
 
 
+
     @Override
-    public String calculateAllBillsForYears(String year) {
+    public List<Bill> findAllBillsWeb() {
+        return this.billsRepository.findAll()
+                .stream().sorted(Comparator.comparingLong(Bill::getId))
+                .toList();
+    }
+
+    @Override
+    public String calculateAllBillsForYearsRest(String year) {
         return "Sum for "
                 + year +
                 " year is "
                 + this.billsRepository.findAll()
                 .stream().filter(bill -> bill.getDate().endsWith(year))
                 .mapToDouble(Bill::getSum).sum() + " lv.";
+    }
+
+    @Override
+    public List<Bill> calculateAllBillsForYearsWeb(String year) {
+        return null;
     }
 }
