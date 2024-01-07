@@ -18,12 +18,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="bill: ${getAllBills}" class="entry" >
-        <td th:text="${bill.date}" class="box"/>
-        <td th:text="${bill.month}" class="box"/>
-        <td th:text="${bill.firstNumber}" class="box"/>
-        <td th:text="${bill.secondNumber}" class="box"/>
-        <td th:text="${bill.sum}" class="box"/>
+    <tr th:each="bill: ${getAllBills}">
+        <td th:text="${bill.date}"/>
+        <td th:text="${bill.month}"/>
+        <td th:text="${bill.firstNumber}"/>
+        <td th:text="${bill.secondNumber}"/>
+        <td th:text="${bill.sum}"/>
     </tr>
     </tbody>
 </table>
