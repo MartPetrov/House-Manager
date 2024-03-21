@@ -36,3 +36,4 @@ out/
 /Сарафово - Етажна собственост/
 .DS_Store
 test
+src/main/resources/application.properties
