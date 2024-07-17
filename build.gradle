@@ -23,6 +23,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.24'
 	annotationProcessor 'org.projectlombok:lombok:1.18.24'
 	implementation 'javax.validation:validation-api:2.0.1.Final'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 }
 
