@@ -21,6 +21,7 @@ public class Apartment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @Column
     @NonNull
     private String number;
@@ -33,8 +34,8 @@ public class Apartment {
     @OneToMany
     private List<Bill> bills;
 
-     @OneToMany
-     private List<People> peoples;
+    @OneToMany
+    private List<People> peoples;
 
     public Apartment(@NonNull String number, @NonNull String floor) {
         this.number = number;
