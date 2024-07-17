@@ -22,7 +22,6 @@ public class Apartment {
     private Long id;
 
 
-
     @Column
     @NonNull
     private String number;
@@ -35,8 +34,8 @@ public class Apartment {
     @OneToMany
     private List<Bill> bills;
 
-     @OneToMany
-     private List<People> peoples;
+    @OneToMany
+    private List<People> peoples;
 
     public Apartment(Long id, @NonNull String number, @NonNull String floor) {
         this.id = id;
