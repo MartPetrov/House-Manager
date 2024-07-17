@@ -13,9 +13,9 @@ spring:
         enabled: 'true'
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
+    username: ${db_username}
+    #    username: ${db_username_workstation}
     password: ${db_password}
-#    username: ${db_username}
-    username: ${db_username_workstation}
     url: ${db_url}
 logging:
   level:

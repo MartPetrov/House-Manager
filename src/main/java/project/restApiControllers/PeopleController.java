@@ -26,13 +26,13 @@ public class PeopleController {
 
     @RequestMapping(value = "/findAllPeopleRest")
     public @ResponseBody String findAllPeople() {
-       return this.peopleService.findAllPeopleRest();
+        return this.peopleService.findAllPeopleRest();
     }
     //           http://localhost:8080/findAllPeopleRest
 
     @PostMapping(value = "/deleteAllPeople", params = {"Password"})
-    public @ResponseBody String deleteAllPeople(@RequestParam(value = "Password") String password ) {
-            return this.peopleService.deleteAllPeople(password);
-       }
+    public @ResponseBody String deleteAllPeople(@RequestParam(value = "Password") String password) {
+        return this.peopleService.deleteAllPeople(password);
+    }
 //           http://localhost:8080/deleteAllPeople
 }
