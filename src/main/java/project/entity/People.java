@@ -27,7 +27,7 @@ public class People implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     @NonNull
     private String first_name;
 
@@ -41,17 +41,6 @@ public class People implements Serializable {
     @Column
     @NonNull
     private Integer apartmentNumber;
-
-    @Column
-    private double importMoney;
-
-
-    @Column
-    private double expensesMoney;
-
-
-    @Column
-    private double allMoneyInAccount;
 
     @Override
     public boolean equals(Object o) {
