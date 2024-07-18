@@ -36,14 +36,21 @@ public class Bill {
     @Column
     @NonNull
     private Double sum;
-    public Bill() {};
 
-    public Bill(String firstNumber, String secondNumber, String date, Double sum, int month) {
+    @Column()
+    @NonNull
+    @Enumerated(EnumType.STRING)
+    private TypeOfBill typeOfBill;
+
+    public Bill() {}
+
+    public Bill(String firstNumber, String secondNumber, String date, Double sum, int month, TypeOfBill typeOfBill) {
         this.firstNumber = firstNumber;
         this.secondNumber = secondNumber;
         this.date = date;
         this.sum = sum;
         this.month = month;
+        this.typeOfBill = typeOfBill;
     }
 
     public String toStringRest() {
