@@ -3,7 +3,7 @@ package project.service.impl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import project.entity.Apartment;
-import project.entity.People;
+import project.entity.UserEntity;
 import project.repositories.ApartmentRepository;
 import project.service.ApartmentService;
 
@@ -18,7 +18,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 
 
     @Override
-    public String importApartment(String number, String floor, List<People> peopleList) {
+    public String importApartment(String number, String floor, List<UserEntity> peopleList) {
         Apartment apartment = new Apartment(number, floor);
         apartment.setPeoples(peopleList);
         this.apartmentRepository.save(apartment);

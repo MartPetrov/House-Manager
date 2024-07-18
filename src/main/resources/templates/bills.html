@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>House-Manager</title>
-    <link th:href="@{/css/bills.css}" rel="stylesheet"/>
+    <link th:href="@{/css/mainPage.css}" rel="stylesheet"/>
 </head>
 <body>
 <a href="http://localhost:8080">Home</a>
@@ -15,6 +15,7 @@
         <th scope="col">firstNumber</th>
         <th scope="col">secondNumber</th>
         <th scope="col">sum</th>
+        <th scope="col">typeOfBill</th>
     </tr>
     </thead>
     <tbody>
@@ -24,6 +25,7 @@
         <td th:text="${bill.firstNumber}"/>
         <td th:text="${bill.secondNumber}"/>
         <td th:text="${bill.sum}"/>
+        <td th:text="${bill.typeOfBill}"/>
     </tr>
     </tbody>
 </table>

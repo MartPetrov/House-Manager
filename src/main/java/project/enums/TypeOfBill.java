@@ -1,4 +1,4 @@
-package project.entity;
+package project.enums;
 
 public enum TypeOfBill {
     ELECTRICITY,
