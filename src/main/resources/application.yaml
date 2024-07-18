@@ -5,8 +5,12 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: 'TRUE'
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     open-in-view: 'false'
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
   mvc:
     hiddenmethod:
       filter:
@@ -14,7 +18,6 @@ spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     username: ${db_username}
-    #    username: ${db_username_workstation}
     password: ${db_password}
     url: ${db_url}
 logging:
