@@ -3,7 +3,7 @@ package project.service.impl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import project.entity.Bill;
-import project.entity.TypeOfBill;
+import project.enums.TypeOfBill;
 import project.repositories.BillsRepository;
 import project.service.BillService;
 

@@ -2,7 +2,7 @@ package project.restApiControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import project.entity.TypeOfBill;
+import project.enums.TypeOfBill;
 import project.service.BillService;
 
 @RestController

@@ -2,8 +2,8 @@ package project.service.impl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import project.entity.People;
-import project.repositories.PeopleRepository;
+import project.entity.UserEntity;
+import project.repositories.UserRepository;
 import project.service.PeopleService;
 
 import java.util.Comparator;
@@ -14,12 +14,12 @@ import static project.constans.Messages.*;
 @Service
 @AllArgsConstructor
 public class PeopleServiceImpl implements PeopleService {
-    private final PeopleRepository peopleRepository;
+    private final UserRepository peopleRepository;
 
     @Override
     public String importPeople(String firstName, String lastName, String phoneNumber, Integer apartmentNumber) {
-        People newPeople = new People(firstName, lastName, apartmentNumber);
-        People byFirstNameAndSecondName = peopleRepository.findPeopleByFirst_nameAndSecond_name(firstName, lastName);
+        UserEntity newPeople = new UserEntity(firstName, lastName, apartmentNumber);
+        UserEntity byFirstNameAndSecondName = peopleRepository.findPeopleByFirst_nameAndSecond_name(firstName, lastName);
         if (phoneNumber != null && phoneNumber.startsWith("359")) {
             newPeople.setPhoneNumber(phoneNumber);
         } else {
@@ -33,17 +33,17 @@ public class PeopleServiceImpl implements PeopleService {
     }
 
     @Override
-    public List<People> findAllPeople() {
+    public List<UserEntity> findAllPeople() {
              return   this.peopleRepository.findAll().stream()
-                        .sorted(Comparator.comparingInt(People::getApartmentNumber))
+                        .sorted(Comparator.comparingInt(UserEntity::getApartmentNumber))
                         .toList();
     }
 
     @Override
     public String findAllPeopleRest() {
-        List<People> allPeopleCompareApartment =
+        List<UserEntity> allPeopleCompareApartment =
                 this.peopleRepository.findAll().stream()
-                .sorted(Comparator.comparingInt(People::getApartmentNumber))
+                .sorted(Comparator.comparingInt(UserEntity::getApartmentNumber))
                 .toList();
         StringBuilder sb = new StringBuilder();
         allPeopleCompareApartment.forEach(p -> sb.append(p.toStringRest()));

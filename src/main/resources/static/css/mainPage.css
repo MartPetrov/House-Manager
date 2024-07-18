@@ -6,15 +6,10 @@ body {
     background-size: cover;
     background-color: #464646;
 }
-
-li {
-display: inline-block;
-size: 48px;
-line-height: 40px;
-height: 20px;
-padding: 20px;
+.navbar .logo {
+    max-height: 50px;
+    padding-right: 100px;
 }
-
 
 .container, .container-fluid {
     padding-top: 90px;
@@ -23,7 +18,7 @@ padding: 20px;
 .bg-text {
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
-    color: white;
+    color: yellowgreen;
     font-weight: bold;
     border: 3px solid #f1f1f1;
     z-index: 2;
@@ -31,10 +26,14 @@ padding: 20px;
     padding: 20px;
     text-align: center;
 }
+.nav-item {
+    color: yellowgreen;
+}
 
 .brand-section {
     background-image: linear-gradient(to bottom right, rgba(220, 220, 220, 0.9), rgba(255, 255, 255, 0.9));
 }
+
 
 td, th {
     padding: 3px 8px;
@@ -61,5 +60,6 @@ form.main-form {
 .logged-user {
     color: white;
 }
+
 
 

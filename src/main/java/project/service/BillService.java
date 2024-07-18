@@ -1,7 +1,7 @@
 package project.service;
 
 import project.entity.Bill;
-import project.entity.TypeOfBill;
+import project.enums.TypeOfBill;
 
 import java.util.List;
 

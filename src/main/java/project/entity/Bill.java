@@ -1,9 +1,10 @@
 package project.entity;
 
 import com.google.gson.Gson;
+import jakarta.persistence.*;
 import lombok.*;
+import project.enums.TypeOfBill;
 
-import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
