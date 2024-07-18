@@ -3,10 +3,12 @@ package project.service.impl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import project.entity.Bill;
+import project.entity.TypeOfBill;
 import project.repositories.BillsRepository;
 import project.service.BillService;
 
 import java.time.Year;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -19,8 +21,13 @@ public class BillServiceImpl implements BillService {
 
 
     @Override
-    public String importBill(String firstNumber, String secondNumber, String date, Double sum, int month) {
-        Bill bill = new Bill(firstNumber, secondNumber, date, sum, month);
+    public String importBill(String firstNumber, String secondNumber, String date, Double sum, int month, TypeOfBill typeOfBill) {
+        TypeOfBill[] values = TypeOfBill.values();
+        if (Arrays.stream(values).noneMatch(type -> type.equals(typeOfBill))) {
+            return "Invalid type of bill";
+        }
+        Bill bill = new Bill(firstNumber, secondNumber, date, sum, month,typeOfBill);
+
         this.billsRepository.save(bill);
         return SUCCESSFUL_IMPORT_BILL + " for month " + month;
     }
@@ -55,8 +62,4 @@ public class BillServiceImpl implements BillService {
                 .mapToDouble(Bill::getSum).sum() + " lv.";
     }
 
-    @Override
-    public List<Bill> calculateAllBillsForYearsWeb(String year) {
-        return null;
-    }
 }

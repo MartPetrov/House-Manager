@@ -2,6 +2,7 @@ package project.restApiControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import project.entity.TypeOfBill;
 import project.service.BillService;
 
 @RestController
@@ -13,13 +14,14 @@ public class BillController {
         this.billService = billService;
     }
 
-    @PostMapping(value = "/importBill", params = {"firstNumber","secondNumber","date","sum","month"})
+    @PostMapping(value = "/importBill", params = {"firstNumber", "secondNumber", "date", "sum", "month"})
     public @ResponseBody String importBill(@RequestParam(value = "firstNumber") String firstNumber,
                                            @RequestParam(value = "secondNumber") String secondNumber,
                                            @RequestParam(value = "date") String date,
                                            @RequestParam(value = "sum") Double sum,
-                                           @RequestParam(value = "month") int month) {
-        return this.billService.importBill(firstNumber, secondNumber, date, sum, month);
+                                           @RequestParam(value = "month") int month,
+                                           @RequestParam(value = "typeOfBill") TypeOfBill typeOfBill) {
+        return this.billService.importBill(firstNumber, secondNumber, date, sum, month, typeOfBill );
     }
     //         http://localhost:8080/importBill?firstNumber=&secondNumber=&date=&sum=&month=
 
@@ -30,7 +32,7 @@ public class BillController {
     }
     //           http://localhost:8080/findAllBillsForThisYear
 
-    @RequestMapping(value = "/sumForYear",params = {"year"})
+    @RequestMapping(value = "/sumForYear", params = {"year"})
     public @ResponseBody String sumForYear(@RequestParam(value = "year") String year) {
         return this.billService.calculateAllBillsForYearsRest(year);
     }

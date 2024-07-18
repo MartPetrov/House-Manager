@@ -30,7 +30,7 @@ public class Apartment {
     private String floor;
 
 
-    @OneToMany
+    @ManyToMany
     private List<Bill> bills;
 
     @OneToMany
