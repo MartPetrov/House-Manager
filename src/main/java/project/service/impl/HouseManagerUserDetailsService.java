@@ -12,7 +12,6 @@ import project.model.enums.UserRoleEnum;
 import project.model.user.HouseManagerUserDetails;
 import project.repositories.UserRepository;
 
-@Service
 public class HouseManagerUserDetailsService implements UserDetailsService {
 
   private final UserRepository userRepository;
