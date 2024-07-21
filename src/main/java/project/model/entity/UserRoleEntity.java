@@ -1,8 +1,8 @@
-package project.entity;
+package project.model.entity;
 
 
 import jakarta.persistence.*;
-import project.enums.UserRoleEnum;
+import project.model.enums.UserRoleEnum;
 
 
 import javax.validation.constraints.NotNull;

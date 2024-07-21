@@ -5,12 +5,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import project.entity.UserEntity;
-import project.entity.UserRoleEntity;
-import project.enums.UserRoleEnum;
+import org.springframework.stereotype.Service;
+import project.model.entity.UserEntity;
+import project.model.entity.UserRoleEntity;
+import project.model.enums.UserRoleEnum;
+import project.model.user.HouseManagerUserDetails;
 import project.repositories.UserRepository;
-import project.user.HouseManagerUserDetails;
 
+@Service
 public class HouseManagerUserDetailsService implements UserDetailsService {
 
   private final UserRepository userRepository;
@@ -36,8 +38,8 @@ public class HouseManagerUserDetailsService implements UserDetailsService {
             userEntity.getEmail(),
             userEntity.getPassword(),
             userEntity.getRoles().stream().map(UserRoleEntity::getRole).map(HouseManagerUserDetailsService::map).toList(),
-            userEntity.getFirst_name(),
-            userEntity.getSecond_name()
+            userEntity.getFirstName(),
+            userEntity.getLastName()
     );
   }
 

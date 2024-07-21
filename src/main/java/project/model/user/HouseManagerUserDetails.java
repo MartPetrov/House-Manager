@@ -1,4 +1,4 @@
-package project.user;
+package project.model.user;
 
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
