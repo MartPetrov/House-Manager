@@ -9,7 +9,7 @@ import project.model.dto.BuildingDTO;
 import project.service.BuildingService;
 
 @Controller
-@RequestMapping("/buildings")
+@RequestMapping("/building")
 public class BuildingsController {
     private final BuildingService buildingService;
 
@@ -24,7 +24,7 @@ public class BuildingsController {
 
     @GetMapping("/add")
     public String addModerator() {
-        return "add-moderator";
+        return "add-building";
     }
 
     @PostMapping("/add")
