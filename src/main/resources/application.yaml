@@ -30,6 +30,6 @@ logging:
       nodeValue: WARN
     blog: WARN
   file:
-    path: C:\Users\Marti\iCloudDrive\Logs-House-Manager
+    path: ${cloud_path}
 server:
   port: 8080
