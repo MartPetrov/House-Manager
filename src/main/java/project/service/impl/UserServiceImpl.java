@@ -78,7 +78,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registerUser(UserRegistrationDTO userRegistration) {
-        userRepository.save(map(userRegistration));
+        UserEntity newUser = map(userRegistration);
+        newUser.getRoles().add(this.userRoleEntityService.findUserRolesById(1));
+        userRepository.save(newUser);
     }
 
     @Override
@@ -93,7 +95,6 @@ public class UserServiceImpl implements UserService {
 
     private UserEntity map(UserRegistrationDTO userRegistrationDTO) {
         UserEntity mappedEntity = modelMapper.map(userRegistrationDTO, UserEntity.class);
-        System.out.printf("username:" +  userRegistrationDTO.getEmail()  +  "Password" + userRegistrationDTO.getPassword());
         mappedEntity.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
 
         return mappedEntity;

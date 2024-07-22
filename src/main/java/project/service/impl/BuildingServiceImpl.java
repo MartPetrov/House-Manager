@@ -33,12 +33,12 @@ public class BuildingServiceImpl implements BuildingService {
 
     @Override
     public List<BuildingDTO> getAllMyBuildings() {
-
-      return  this.buildingRepository
-                .findAll()
+        List<BuildingDTO> collect = this.buildingRepository
+                .findBuildingEntitiesByUsersId(1)
                 .stream()
                 .map(this::map)
                 .collect(Collectors.toList());
+        return  collect;
     }
 
     private BuildingDTO map(BuildingEntity buildingEntity) {

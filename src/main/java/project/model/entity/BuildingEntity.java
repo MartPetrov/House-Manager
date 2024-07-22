@@ -21,7 +21,7 @@ public class BuildingEntity {
     @OneToMany
     private List<BillEntity> bills;
 
-    @OneToMany
+    @ManyToMany
     private List<UserEntity> users;
 
     @NotEmpty

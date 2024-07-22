@@ -15,14 +15,13 @@
 
     <div class="col-5 my-buildings">
         <div class="bg-dark rounded m-auto tab-content" style="height: 67vh; overflow: auto">
+            <h3 th:text="|My Buildings (${myBuildings.size()})|"
+                    class="text-white  mb-0 mt-2 ui-front">My Buildings ({count})</h3>
             <ul th:each="building : ${myBuildings}"
                 th:object="${myBuildings}"
                 class="list-group list-group-horizontal text-dark">
                 <li class="list-group-item bg-warning">
                     <table class="table-bordered table-hover table-dark">
-                        <h3
-                                th:text="|My Buildings (${myBuildings.size()})|"
-                                class="text-dark  mb-0 mt-2">My Buildings ({count})</h3>
                         <tr>
                             <td>City</td>
                             <td>Street</td>
