@@ -1,6 +1,8 @@
 package project.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -22,15 +24,26 @@ public class BuildingEntity {
     @OneToMany
     private List<UserEntity> users;
 
-    @Column
-    @NonNull
-    private String address;
+    @NotEmpty
+    @Getter
+    @Setter
+    private String city;
 
-    public BuildingEntity(@NonNull String number, @NonNull String address) {
-        this.address = address;
+    @NotEmpty
+    @Getter
+    @Setter
+    private String street;
+
+    @NotEmpty
+    @Getter
+    @Setter
+    private String number;
+
+    public BuildingEntity(String city, String street, String number) {
+        this.city = city;
+        this.street = street;
+        this.number = number;
         this.bills = new ArrayList<>();
+        this.users = new ArrayList<>();
     }
-
-
-
 }

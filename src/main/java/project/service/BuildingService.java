@@ -1,9 +1,12 @@
 package project.service;
 
 import project.model.dto.BuildingDTO;
-import project.model.dto.UserModeratorDTO;
+
+import java.util.List;
 
 public interface BuildingService {
 
     void addBuilding(BuildingDTO buildingDTO);
+
+    List<BuildingDTO> getAllMyBuildings();
 }
