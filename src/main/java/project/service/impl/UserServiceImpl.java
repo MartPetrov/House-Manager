@@ -4,13 +4,21 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import project.model.dto.BuildingDTO;
 import project.model.dto.UserModeratorDTO;
 import project.model.dto.UserRegistrationDTO;
+import project.model.entity.BuildingEntity;
 import project.model.entity.UserEntity;
+import project.repositories.BuildingRepository;
 import project.repositories.UserRepository;
 import project.service.UserRoleEntityService;
 import project.service.UserService;
+import project.service.exception.BuildingNotFoundException;
+import project.service.exception.ObjectNotFoundException;
+import project.service.exception.UserAlreadyDoThat;
+import project.service.exception.UserNotFoundException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,14 +28,16 @@ public class UserServiceImpl implements UserService {
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final BuildingRepository buildingRepository;
     private final UserRoleEntityService userRoleEntityService;
 
     public UserServiceImpl(ModelMapper modelMapper,
                            PasswordEncoder passwordEncoder,
-                           UserRepository userRepository, UserRoleEntityService userRoleEntityService) {
+                           UserRepository userRepository, BuildingRepository buildingRepository, UserRoleEntityService userRoleEntityService) {
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
+        this.buildingRepository = buildingRepository;
         this.userRoleEntityService = userRoleEntityService;
     }
 
@@ -84,13 +94,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addModerator(UserModeratorDTO userModeratorDTO) {
+    public void addModerator(UserModeratorDTO userModeratorDTO, BuildingDTO buildingDTO) {
         Optional<UserEntity> userFromRepo = userRepository.findByEmail(userModeratorDTO.getEmail());
-        if (userFromRepo.isPresent()) {
+        Optional<BuildingEntity> buildingEntity = buildingRepository.findBuildingEntitiesByAddress(buildingDTO.getCity(), buildingDTO.getStreet(), buildingDTO.getNumber());
+        if (buildingEntity.isEmpty()) {
+            throw new BuildingNotFoundException("This building is not registered");
+        }else if (userFromRepo.isEmpty()) {
+            throw new UserNotFoundException("User with email:" + userModeratorDTO.getEmail() + " does not exist");
+        } else if (buildingEntity.get().getModerators().contains(userFromRepo.get())) {
+            throw new UserAlreadyDoThat("User with email: " + userFromRepo.get().getEmail() + " is already moderator of this building");
+        }
+
+
             UserEntity userEntity = userFromRepo.get();
             userEntity.getRoles().add(this.userRoleEntityService.findUserRolesById(3));
             userRepository.save(userEntity);
-        }
+            BuildingEntity buildingEntityFromRepo = buildingEntity.get();
+            List<UserEntity> moderators = buildingEntityFromRepo.getModerators();
+            moderators.add(userEntity);
+            buildingEntityFromRepo.setModerators(moderators);
+            buildingRepository.save(buildingEntityFromRepo);
+
     }
 
     private UserEntity map(UserRegistrationDTO userRegistrationDTO) {
