@@ -13,7 +13,10 @@ import project.repositories.BuildingRepository;
 import project.repositories.UserRepository;
 import project.service.UserRoleEntityService;
 import project.service.UserService;
+import project.service.exception.BuildingNotFoundException;
+import project.service.exception.ObjectNotFoundException;
 import project.service.exception.UserAlreadyDoThat;
+import project.service.exception.UserNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -94,12 +97,15 @@ public class UserServiceImpl implements UserService {
     public void addModerator(UserModeratorDTO userModeratorDTO, BuildingDTO buildingDTO) {
         Optional<UserEntity> userFromRepo = userRepository.findByEmail(userModeratorDTO.getEmail());
         Optional<BuildingEntity> buildingEntity = buildingRepository.findBuildingEntitiesByAddress(buildingDTO.getCity(), buildingDTO.getStreet(), buildingDTO.getNumber());
-        if (buildingEntity.isPresent()
-                && userFromRepo.isPresent()
-                && buildingEntity.get().getModerators().contains(userFromRepo.get())) {
+        if (buildingEntity.isEmpty()) {
+            throw new BuildingNotFoundException("This building is not registered");
+        }else if (userFromRepo.isEmpty()) {
+            throw new UserNotFoundException("User with email:" + userModeratorDTO.getEmail() + " does not exist");
+        } else if (buildingEntity.get().getModerators().contains(userFromRepo.get())) {
             throw new UserAlreadyDoThat("User with email: " + userFromRepo.get().getEmail() + " is already moderator of this building");
         }
-        if (userFromRepo.isPresent() && buildingEntity.isPresent()) {
+
+
             UserEntity userEntity = userFromRepo.get();
             userEntity.getRoles().add(this.userRoleEntityService.findUserRolesById(3));
             userRepository.save(userEntity);
@@ -108,7 +114,7 @@ public class UserServiceImpl implements UserService {
             moderators.add(userEntity);
             buildingEntityFromRepo.setModerators(moderators);
             buildingRepository.save(buildingEntityFromRepo);
-        }
+
     }
 
     private UserEntity map(UserRegistrationDTO userRegistrationDTO) {
