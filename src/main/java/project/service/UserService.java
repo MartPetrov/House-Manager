@@ -1,10 +1,8 @@
 package project.service;
 
+import project.model.dto.BuildingDTO;
 import project.model.dto.UserModeratorDTO;
 import project.model.dto.UserRegistrationDTO;
-import project.model.entity.UserEntity;
-
-import java.util.List;
 
 public interface UserService {
 
@@ -18,7 +16,7 @@ public interface UserService {
 
     void registerUser(UserRegistrationDTO userRegistration);
 
-    void addModerator(UserModeratorDTO userModerator);
+    void addModerator(UserModeratorDTO userModerator, BuildingDTO buildingDTO);
 
 }
 

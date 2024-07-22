@@ -13,4 +13,9 @@ public class UserModeratorDTO {
     @Getter
     @Setter
     private String email;
+
+    @NotEmpty
+    @Getter
+    @Setter
+    private BuildingDTO buildingDTO;
 }

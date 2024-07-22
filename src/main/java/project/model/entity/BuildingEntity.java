@@ -24,6 +24,11 @@ public class BuildingEntity {
     @ManyToMany
     private List<UserEntity> users;
 
+    @OneToMany
+    @Getter
+    @Setter
+    private List<UserEntity> moderators;
+
     @NotEmpty
     @Getter
     @Setter
@@ -45,5 +50,6 @@ public class BuildingEntity {
         this.number = number;
         this.bills = new ArrayList<>();
         this.users = new ArrayList<>();
+        this.moderators = new ArrayList<>();
     }
 }

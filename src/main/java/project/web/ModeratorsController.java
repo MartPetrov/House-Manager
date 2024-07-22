@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import project.model.dto.BuildingDTO;
 import project.model.dto.UserModeratorDTO;
 import project.service.UserService;
 
@@ -29,9 +30,9 @@ public class ModeratorsController {
     }
 
     @PostMapping("/add")
-    public String register(UserModeratorDTO UserModDTO) {
+    public String register(UserModeratorDTO UserModDTO, BuildingDTO buildingDTO) {
 
-        userService.addModerator(UserModDTO);
+        userService.addModerator(UserModDTO, buildingDTO);
 
         return "redirect:/";
     }
