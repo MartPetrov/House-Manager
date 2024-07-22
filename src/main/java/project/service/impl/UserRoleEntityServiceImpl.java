@@ -2,6 +2,7 @@ package project.service.impl;
 
 import org.springframework.stereotype.Service;
 import project.model.entity.UserRoleEntity;
+import project.model.enums.UserRoleEnum;
 import project.repositories.UserRoleEntityRepository;
 import project.service.UserRoleEntityService;
 
@@ -14,7 +15,7 @@ public class UserRoleEntityServiceImpl implements UserRoleEntityService {
     }
 
     @Override
-    public UserRoleEntity findUserRolesById(int id) {
-        return this.userRoleEntityRepository.findById(id);
+    public UserRoleEntity findUserRolesByRole(UserRoleEnum role) {
+        return this.userRoleEntityRepository.findByRole(role);
     }
 }

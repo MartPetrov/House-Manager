@@ -9,12 +9,12 @@ import project.model.dto.UserModeratorDTO;
 import project.model.dto.UserRegistrationDTO;
 import project.model.entity.BuildingEntity;
 import project.model.entity.UserEntity;
+import project.model.enums.UserRoleEnum;
 import project.repositories.BuildingRepository;
 import project.repositories.UserRepository;
 import project.service.UserRoleEntityService;
 import project.service.UserService;
 import project.service.exception.BuildingNotFoundException;
-import project.service.exception.ObjectNotFoundException;
 import project.service.exception.UserAlreadyDoThat;
 import project.service.exception.UserNotFoundException;
 
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void registerUser(UserRegistrationDTO userRegistration) {
         UserEntity newUser = map(userRegistration);
-        newUser.getRoles().add(this.userRoleEntityService.findUserRolesById(1));
+        newUser.getRoles().add(this.userRoleEntityService.findUserRolesByRole(UserRoleEnum.USER));
         userRepository.save(newUser);
     }
 
@@ -99,21 +99,23 @@ public class UserServiceImpl implements UserService {
         Optional<BuildingEntity> buildingEntity = buildingRepository.findBuildingEntitiesByAddress(buildingDTO.getCity(), buildingDTO.getStreet(), buildingDTO.getNumber());
         if (buildingEntity.isEmpty()) {
             throw new BuildingNotFoundException("This building is not registered");
-        }else if (userFromRepo.isEmpty()) {
+        } else if (userFromRepo.isEmpty()) {
             throw new UserNotFoundException("User with email:" + userModeratorDTO.getEmail() + " does not exist");
         } else if (buildingEntity.get().getModerators().contains(userFromRepo.get())) {
             throw new UserAlreadyDoThat("User with email: " + userFromRepo.get().getEmail() + " is already moderator of this building");
         }
 
 
-            UserEntity userEntity = userFromRepo.get();
-            userEntity.getRoles().add(this.userRoleEntityService.findUserRolesById(3));
-            userRepository.save(userEntity);
-            BuildingEntity buildingEntityFromRepo = buildingEntity.get();
-            List<UserEntity> moderators = buildingEntityFromRepo.getModerators();
-            moderators.add(userEntity);
-            buildingEntityFromRepo.setModerators(moderators);
-            buildingRepository.save(buildingEntityFromRepo);
+        UserEntity userEntity = userFromRepo.get();
+        userEntity.getRoles().add(this.userRoleEntityService.findUserRolesByRole(UserRoleEnum.MODERATOR));
+        userRepository.save(userEntity);
+        BuildingEntity buildingEntityFromRepo = buildingEntity.get();
+        List<UserEntity> moderators = buildingEntityFromRepo.getModerators();
+        moderators.add(userEntity);
+        buildingEntityFromRepo.setModerators(moderators);
+        List<UserEntity> users = buildingEntityFromRepo.getUsers();
+        users.add(userEntity);
+        buildingRepository.save(buildingEntityFromRepo);
 
     }
 

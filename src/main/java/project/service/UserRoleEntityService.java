@@ -1,11 +1,9 @@
 package project.service;
 
 import project.model.entity.UserRoleEntity;
-
-import java.util.List;
-import java.util.Optional;
+import project.model.enums.UserRoleEnum;
 
 public interface UserRoleEntityService {
 
-    UserRoleEntity findUserRolesById(int id);
+    UserRoleEntity findUserRolesByRole(UserRoleEnum roleEnum);
 }

@@ -29,5 +29,7 @@ logging:
         SQL: DEBUG
       nodeValue: WARN
     blog: WARN
+  file:
+    path: ${cloud_path}
 server:
   port: 8080

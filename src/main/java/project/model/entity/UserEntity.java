@@ -8,7 +8,9 @@ import lombok.NonNull;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -17,9 +19,21 @@ import java.util.*;
 @Table(name = "users")
 public class UserEntity implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    @NonNull
+    private String firstName;
+
+    @Column
+    private String lastName;
+
     @Setter
     @Getter
     private String email;
+
     @Setter
     @Getter
     private String password;
@@ -34,23 +48,6 @@ public class UserEntity implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private List<UserRoleEntity> roles = new ArrayList<>();
-
-    public UserEntity(String firstName, String lastName, Integer apartmentNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
-    @NonNull
-    private String firstName;
-
-
-    @Column
-    private String lastName;
 
 
     @Override
