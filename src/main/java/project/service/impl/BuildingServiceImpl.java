@@ -33,6 +33,7 @@ public class BuildingServiceImpl implements BuildingService {
 
     @Override
     public List<BuildingDTO> getAllMyBuildings() {
+
       return  this.buildingRepository
                 .findAll()
                 .stream()
