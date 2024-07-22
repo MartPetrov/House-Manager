@@ -29,5 +29,7 @@ logging:
         SQL: DEBUG
       nodeValue: WARN
     blog: WARN
+  file:
+    path: C:\Users\Marti\iCloudDrive\Logs-House-Manager
 server:
   port: 8080
