@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>House-Manager</title>
+    <link rel="stylesheet" href="/css/reset.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/mainPage.css"/>
+    <script src="/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div th:replace="~{fragments/navbar::navbar(activeLink=${'login'})}"></div>
+
+    <div class="col-5">
+        <h3 class=" bg-gray text-dark  mb-0 mt-2">Assigned to me</h3>
+        <h6 class=" bg-gray text-dark  mb-0 mt-0"
+            th:text="|Username: ${loggedUserName}|">
+        </h6>
+        <div class="bg-dark rounded m-auto" style="height: 67vh; overflow: auto">
+            <ul th:each="building : ${myBuildings}"
+                th:object="${myBuildings}"
+                class="list-group list-group-horizontal text-dark">
+                <li class="list-group-item bg-warning">
+                    <table class="table-bordered table-hover table-dark">
+                        <h3
+                                th:text="|My Buildings (${myBuildings.size()})|"
+                                class="text-dark  mb-0 mt-2">My Buildings ({count})</h3>
+                        <tr>
+                            <td>City</td>
+                            <td>Street</td>
+                            <td>Number</td>
+                        </tr>
+                        <tr>
+                            <td  th:text="${building.getCity()}"
+                                 style="width: 15%">{city}</td>
+                            <td th:text="${building.getStreet()}"
+                                style="width: 40%">{street}</td>
+                            <td th:text="${building.getNumber()}">{number}</td>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -7,6 +7,10 @@ import project.model.entity.BuildingEntity;
 import project.repositories.BuildingRepository;
 import project.service.BuildingService;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class BuildingServiceImpl implements BuildingService {
 
@@ -26,4 +30,23 @@ public class BuildingServiceImpl implements BuildingService {
     private BuildingEntity map(BuildingDTO buildingDTO) {
         return modelMapper.map(buildingDTO, BuildingEntity.class);
     }
+
+    @Override
+    public List<BuildingDTO> getAllMyBuildings() {
+      return  this.buildingRepository
+                .findAll()
+                .stream()
+                .map(this::map)
+                .collect(Collectors.toList());
+    }
+
+    private BuildingDTO map(BuildingEntity buildingEntity) {
+        BuildingDTO newBuilding = new BuildingDTO();
+        newBuilding.setCity(buildingEntity.getCity());
+        newBuilding.setStreet(buildingEntity.getStreet());
+        newBuilding.setNumber(buildingEntity.getNumber());
+
+        return newBuilding;
+    }
+
 }
