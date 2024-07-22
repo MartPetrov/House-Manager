@@ -2,13 +2,18 @@ package project.model.entity;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import project.model.enums.UserRoleEnum;
-
 
 import javax.validation.constraints.NotNull;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "roles")
+@NoArgsConstructor
 public class UserRoleEntity {
 
   @Id
@@ -20,21 +25,7 @@ public class UserRoleEntity {
   @Enumerated(EnumType.STRING)
   private UserRoleEnum role;
 
-  public Long getId() {
-    return id;
-  }
-
-  public UserRoleEntity setId(Long id) {
-    this.id = id;
-    return this;
-  }
-
-  public UserRoleEnum getRole() {
-    return role;
-  }
-
-  public UserRoleEntity setRole(UserRoleEnum role) {
+  public UserRoleEntity(UserRoleEnum role) {
     this.role = role;
-    return this;
   }
 }
