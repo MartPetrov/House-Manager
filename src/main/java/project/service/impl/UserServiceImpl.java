@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
 
     private UserEntity map(UserRegistrationDTO userRegistrationDTO) {
         UserEntity mappedEntity = modelMapper.map(userRegistrationDTO, UserEntity.class);
-
+        System.out.printf("username:" +  userRegistrationDTO.getEmail()  +  "Password" + userRegistrationDTO.getPassword());
         mappedEntity.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
 
         return mappedEntity;

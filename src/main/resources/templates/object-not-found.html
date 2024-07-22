@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>House-Manager</title>
+    <link rel="stylesheet" href="/css/reset.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/mainPage.css"/>
+    <script src="/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar::navbar(activeLink=${'login'})}"></div>
+
+
+<div class="container-fluid">
+    <h5 class="text-center text-danger mt-5 border-warning">Opps! Object with id
+        <th:block th:text="${objectId}">5</th:block>
+        was not found!
+    </h5>
+</div>
+
+<div class="text-center text-danger mt-5 border-warning">We are sorry! Please navigate to <a th:href="@{/}">home page</a>...</div>
+
+<div>
+    <footer></footer>
+</div>
+
+</body>
+</html>

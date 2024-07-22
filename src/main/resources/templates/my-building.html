@@ -13,12 +13,8 @@
 
     <div th:replace="~{fragments/navbar::navbar(activeLink=${'login'})}"></div>
 
-    <div class="col-5">
-        <h3 class=" bg-gray text-dark  mb-0 mt-2">Assigned to me</h3>
-        <h6 class=" bg-gray text-dark  mb-0 mt-0"
-            th:text="|Username: ${loggedUserName}|">
-        </h6>
-        <div class="bg-dark rounded m-auto" style="height: 67vh; overflow: auto">
+    <div class="col-5 my-buildings">
+        <div class="bg-dark rounded m-auto tab-content" style="height: 67vh; overflow: auto">
             <ul th:each="building : ${myBuildings}"
                 th:object="${myBuildings}"
                 class="list-group list-group-horizontal text-dark">
