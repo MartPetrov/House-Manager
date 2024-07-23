@@ -2,7 +2,6 @@ spring:
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: 'TRUE'
     hibernate:
       ddl-auto: update
@@ -21,15 +20,15 @@ spring:
     url: ${db_url}
 logging:
   level:
-    root: info
+    root: INFO
     org:
       hibernate:
         type:
           descriptor: TRACE
-        SQL: DEBUG
+        SQL: off
       nodeValue: WARN
     blog: WARN
   file:
-    path: ${cloud_path}
+    name: ${cloud_path}
 server:
   port: 8080
