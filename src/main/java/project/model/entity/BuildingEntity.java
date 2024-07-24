@@ -2,8 +2,9 @@ package project.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +19,13 @@ public class BuildingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<BillEntity> bills;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<UserEntity> users;
 
-    @OneToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @Getter
     @Setter
     private List<UserEntity> moderators;

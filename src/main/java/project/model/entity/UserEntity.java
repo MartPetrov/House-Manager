@@ -38,6 +38,14 @@ public class UserEntity implements Serializable {
     @Getter
     private String password;
 
+    @Setter
+    @Getter
+    private String apartmentNumber;
+
+    @Setter
+    @Getter
+    private String phoneNumber;
+
     @Getter
     @ManyToMany(
             fetch = FetchType.EAGER, cascade = CascadeType.PERSIST
@@ -68,16 +76,4 @@ public class UserEntity implements Serializable {
         return new Gson().toJson(this);
     }
 
-//    public String toStringRest() {
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(firstName).append(" ").append(lastName).append(System.lineSeparator())
-//                .append("-------").append("ApartmentNumber ").append(System.lineSeparator())
-//                .append("--------------").append("Phone number: ").append(System.lineSeparator());
-//        return sb.toString();
-//    }
-
-    public UserEntity setRoles(List<UserRoleEntity> roles) {
-        this.roles = roles;
-        return this;
-    }
 }

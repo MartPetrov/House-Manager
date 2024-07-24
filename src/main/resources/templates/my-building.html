@@ -11,34 +11,47 @@
 </head>
 <body>
 
-    <div th:replace="~{fragments/navbar::navbar(activeLink=${'login'})}"></div>
+<div th:replace="~{fragments/navbar::navbar(activeLink=${'login'})}"></div>
 
-    <div class="col-5 my-buildings">
-        <div class="bg-dark rounded m-auto tab-content" style="height: 67vh; overflow: auto">
-            <h3 th:text="|My Buildings (${myBuildings.size()})|"
-                    class="text-white  mb-0 mt-2 ui-front">My Buildings ({count})</h3>
-            <ul th:each="building : ${myBuildings}"
-                th:object="${myBuildings}"
-                class="list-group list-group-horizontal text-dark">
-                <li class="list-group-item bg-warning">
-                    <table class="table-bordered table-hover table-dark">
-                        <tr>
-                            <td>City</td>
-                            <td>Street</td>
-                            <td>Number</td>
-                        </tr>
-                        <tr>
-                            <td  th:text="${building.getCity()}"
-                                 style="width: 15%">{city}</td>
-                            <td th:text="${building.getStreet()}"
-                                style="width: 40%">{street}</td>
-                            <td th:text="${building.getNumber()}">{number}</td>
-                        </tr>
-                    </table>
-                </li>
-            </ul>
-        </div>
+<div class="col-5 my-buildings">
+    <div class="bg-dark rounded m-auto tab-content" style="height: 67vh; overflow: auto">
+        <h3 th:text="|My Buildings (${myBuildings.size()})|"
+            class="text-white  mb-0 mt-2 ui-front">My Buildings ({count})</h3>
+        <ul th:each="building : ${myBuildings}"
+            th:object="${myBuildings}"
+            class="list-group list-group-horizontal text-dark">
+            <li class="list-group-item bg-warning">
+                <table class="table-bordered table-hover table-dark">
+                    <tr>
+                        <td>City</td>
+                        <td>Street</td>
+                        <td>Number</td>
+                    </tr>
+                    <tr>
+                        <td th:text="${building.getCity()}"
+                            style="width: 15%">{city}
+                        </td>
+                        <td th:text="${building.getStreet()}"
+                            style="width: 40%">{street}
+                        </td>
+                        <td th:text="${building.getNumber()}">{number}</td>
+                        <td>
+                            <button onclick="window.open(this.getAttribute('data-url'))"
+                                    th:data-url="@{http://localhost:8080/building/findBuildingId/{id}(id=${building.getId()})}">
+                                VIEW this building
+                            </button>
+                        </td>
+                    </tr>
+
+                </table>
+            </li>
+            <li>
+
+            </li>
+
+        </ul>
     </div>
+</div>
 
 </body>
 </html>
