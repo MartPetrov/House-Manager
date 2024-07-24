@@ -2,11 +2,11 @@ package project.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import project.model.dto.BuildingDTO;
+import project.model.entity.BillEntity;
+import project.model.entity.BuildingEntity;
+import project.model.entity.UserEntity;
 import project.service.BuildingService;
 
 import java.util.List;
@@ -40,10 +40,22 @@ public class BuildingsController {
 
     @GetMapping("/my")
     public String allBuildings(Model model) {
-
         List<BuildingDTO> myBuildings = buildingService.getAllMyBuildings();
         model.addAttribute("myBuildings", myBuildings);
         return "my-building";
+    }
+
+    @GetMapping("/findBuildingId/{id}")
+    public String findBuildingById(@PathVariable("id") Long id, Model model) {
+        BuildingEntity currentBuilding = this.buildingService.findBuildingById(id);
+        List<UserEntity> users = currentBuilding.getUsers();
+        List<BillEntity> bills = currentBuilding.getBills();
+        List<UserEntity> moderators = currentBuilding.getModerators();
+        model.addAttribute("users", users);
+        model.addAttribute("bills", bills);
+        model.addAttribute("moderators", moderators);
+        model.addAttribute("currentBuilding", currentBuilding);
+        return "current-building";
     }
 
 }

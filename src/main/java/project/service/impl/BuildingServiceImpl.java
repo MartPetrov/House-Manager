@@ -8,6 +8,7 @@ import project.model.dto.BuildingDTO;
 import project.model.entity.BuildingEntity;
 import project.repositories.BuildingRepository;
 import project.service.BuildingService;
+import project.service.exception.ObjectNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,11 +45,17 @@ public class BuildingServiceImpl implements BuildingService {
         return  collect;
     }
 
+    @Override
+    public BuildingEntity findBuildingById(long id) {
+        return this.buildingRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Building is missing id: ", id));
+    }
+
     private BuildingDTO map(BuildingEntity buildingEntity) {
         BuildingDTO newBuilding = new BuildingDTO();
         newBuilding.setCity(buildingEntity.getCity());
         newBuilding.setStreet(buildingEntity.getStreet());
         newBuilding.setNumber(buildingEntity.getNumber());
+        newBuilding.setId(buildingEntity.getId());
 
         return newBuilding;
     }
