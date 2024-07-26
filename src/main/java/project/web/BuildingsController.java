@@ -45,7 +45,7 @@ public class BuildingsController {
         return "my-building";
     }
 
-    @GetMapping("/findBuildingId/{id}")
+    @GetMapping("/{id}")
     public String findBuildingById(@PathVariable("id") Long id, Model model) {
         BuildingEntity currentBuilding = this.buildingService.findBuildingById(id);
         List<UserEntity> users = currentBuilding.getUsers();

@@ -2,6 +2,7 @@ package project.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "Buildings")
 @NoArgsConstructor
+@EqualsAndHashCode
 public class BuildingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

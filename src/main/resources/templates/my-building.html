@@ -37,7 +37,7 @@
                         <td th:text="${building.getNumber()}">{number}</td>
                         <td>
                             <button onclick="window.open(this.getAttribute('data-url'))"
-                                    th:data-url="@{http://localhost:8080/building/findBuildingId/{id}(id=${building.getId()})}">
+                                    th:data-url="@{http://localhost:8080/building/{id}(id=${building.getId()})}">
                                 VIEW this building
                             </button>
                         </td>

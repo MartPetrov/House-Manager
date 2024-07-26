@@ -48,4 +48,13 @@ public class GlobalExceptionHandler {
 
         return modelAndView;
     }
+
+    @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(UnsupportedOperationException.class)
+    public ModelAndView UnsupportedOperation(UnsupportedOperationException unsupportedOperationException) {
+        ModelAndView modelAndView = new ModelAndView("object-problem-message");
+        modelAndView.addObject("message", unsupportedOperationException.getMessage());
+
+        return modelAndView;
+    }
 }

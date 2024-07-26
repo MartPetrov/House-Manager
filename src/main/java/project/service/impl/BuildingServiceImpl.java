@@ -11,6 +11,7 @@ import project.service.BuildingService;
 import project.service.exception.ObjectNotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,17 +38,32 @@ public class BuildingServiceImpl implements BuildingService {
     @Override
     public List<BuildingDTO> getAllMyBuildings() {
         logger.info("Getting all buildings");
-        List<BuildingDTO> collect =  this.buildingRepository
+        List<BuildingDTO> collect = this.buildingRepository
                 .findBuildingEntitiesByUsersId(1)
                 .stream()
                 .map(this::map)
                 .collect(Collectors.toList());
-        return  collect;
+        return collect;
     }
 
     @Override
     public BuildingEntity findBuildingById(long id) {
-        return this.buildingRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Building is missing id: ", id));
+        List<BuildingDTO> allMyBuildings = getAllMyBuildings();
+        Optional<BuildingEntity> byId = this.buildingRepository.findById(id);
+        if (byId.isEmpty()) {
+            throw new ObjectNotFoundException("Building is missing id: ", id);
+        }
+        BuildingEntity currentBuilding = byId.get();
+        boolean contains = allMyBuildings.stream().anyMatch(buildingDTO -> buildingDTO.getId().equals(id));
+        if (!contains) {
+            //TODO: add currentUserId
+            logger.info("User is trying to access a building that is not his");
+            throw new UnsupportedOperationException("""
+                    Don't do that!!! :)
+                    You are trying to access a building that is not yours""");
+        }
+
+        return currentBuilding;
     }
 
     private BuildingDTO map(BuildingEntity buildingEntity) {
