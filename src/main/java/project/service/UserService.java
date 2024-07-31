@@ -23,5 +23,7 @@ public interface UserService {
     UserEntity findUserByEmail(String email);
 
     void addUserInBuilding(UserInBuildingDTO userDTO, BuildingDTO buildingDTO);
+
+    void removeUser(Long id, Long building_id);
 }
 

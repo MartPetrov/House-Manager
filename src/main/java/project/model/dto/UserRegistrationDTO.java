@@ -32,20 +32,6 @@ public class UserRegistrationDTO {
 
     @Getter
     @Setter
-    private String phone_Number;
+    private String phoneNumber;
 
-    @Getter
-    @Setter
-    private String Apartment;
-
-
-    @Override
-    public String toString() {
-        return "UserRegistrationDTO{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", password='" + (password == null ? "N/A" : "[PROVIDED]") + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
 }
