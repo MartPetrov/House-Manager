@@ -11,7 +11,6 @@ import project.service.BuildingService;
 import project.service.UserService;
 
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/building")
@@ -62,12 +61,11 @@ public class BuildingsController {
         return "current-building";
     }
 
-    @GetMapping("/{building_id}/addUser")
-    public String findBuildingByIdAndAddUser(@PathVariable("building_id") Long id,
-            Model model) {
-        BuildingEntity currentBuilding = this.buildingService.findBuildingById(id);
-        model.addAttribute("currentBuilding", currentBuilding);
-        return "add-user-in-building";
+    @GetMapping("/addUserInBuilding" )
+    public String addUserInBuilding() {
+
+
+              return "addUserInBuilding";
     }
 
 
