@@ -24,13 +24,8 @@ public class BuildingsController {
         this.buildingService = buildingService;
     }
 
-//    @ModelAttribute("registerDTO")
-//    public BuildingDTO addBuildingDTO() {
-//        return new BuildingDTO();
-//    }
-
     @GetMapping("/add")
-    public String addModerator() {
+    public String addBuilding() {
         return "add-building";
     }
 

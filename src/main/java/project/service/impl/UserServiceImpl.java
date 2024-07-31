@@ -1,6 +1,8 @@
 package project.service.impl;
 
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,7 @@ import project.service.exception.UserAlreadyDoThat;
 import project.service.exception.UserNotFoundException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -31,6 +34,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final BuildingRepository buildingRepository;
     private final UserRoleEntityService userRoleEntityService;
+    private final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     public UserServiceImpl(ModelMapper modelMapper,
                            PasswordEncoder passwordEncoder,
@@ -98,11 +102,30 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = userFromRepo.get();
         BuildingEntity buildingEntityFromRepo = buildingEntity.get();
         List<UserEntity> users = buildingEntityFromRepo.getUsers();
-        if (!userDTO.getApartmentNumber().isEmpty())  {
+        if (!userDTO.getApartmentNumber().isEmpty()) {
             userEntity.setApartmentNumber(userDTO.getApartmentNumber());
         }
         users.add(userEntity);
         buildingRepository.save(buildingEntityFromRepo);
+    }
+
+    @Override
+    public void removeUser(Long id, Long building_id) {
+        Optional<BuildingEntity> buildingEntity = buildingRepository.findById(building_id);
+        if (buildingEntity.isPresent()) {
+            BuildingEntity currentBuilding = buildingEntity.get();
+            List<UserEntity> users = currentBuilding.getUsers();
+            for (int i = 0; i < users.size(); i++){
+                UserEntity user = users.get(i);
+                if (user.getId().equals(id)) {
+                    users.remove(i); // remove at index i
+                    logger.info("User with first_name: {} and last_name: {} was removed", user.getFirstName(), user.getLastName());
+
+                }
+
+            }
+            buildingRepository.save(currentBuilding);
+        }
     }
 
 

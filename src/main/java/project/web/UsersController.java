@@ -1,9 +1,8 @@
 package project.web;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import project.model.dto.BuildingDTO;
 import project.model.dto.UserInBuildingDTO;
 import project.service.UserService;
@@ -31,5 +30,10 @@ public class UsersController {
     public String addUser(UserInBuildingDTO userDTO, BuildingDTO buildingDTO) {
         userService.addUserInBuilding(userDTO,buildingDTO);
         return "redirect:/building/my";
+    }
+    @GetMapping("/removeUserFromBuilding/{id}/{building_id}" )
+    public String removeUserFromBuilding(@PathVariable(name="id") Long id, @PathVariable(name="building_id") Long building_id) {
+        userService.removeUser(id, building_id);
+        return "redirect:/building/" + building_id;
     }
 }
