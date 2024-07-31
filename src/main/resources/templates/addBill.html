@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
     <title>House-Manager</title>
@@ -15,10 +15,18 @@
 <div th:replace="~{fragments/navbar::navbar(activeLink=${'login'})}"></div>
 
 <div class="container">
-    <h2 class="text-center text-white">Add Building</h2>
+    <h2 class="text-center text-white">Login</h2>
     <form th:method="post"
-          th:action="@{/building/add}"
+          th:action="@{bill/addBill}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+        <div class="form-group">
+            <label for="UserEmail" class="text-white font-weight-bold">UserEmail</label>
+            <input id="UserEmail"
+                   name="email"
+                   type="text"
+                   class="form-control"
+                   placeholder="UserEmail"/>
+        </div>
         <div class="form-group">
             <label for="city" class="text-white font-weight-bold">City</label>
             <input id="city"
@@ -46,7 +54,7 @@
         <div class="row">
             <div class="col col-md-4">
                 <div class="button-holder d-flex">
-                    <input type="submit" class="btn btn-info btn-lg" value="Add Building"/>
+                    <input type="submit" class="btn btn-info btn-lg" value="Add User in Building"/>
                 </div>
             </div>
         </div>
@@ -54,7 +62,7 @@
 </div>
 
 <div>
-    <footer></footer>
+    <footer> </footer>
 </div>
 </body>
 </html>

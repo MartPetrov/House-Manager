@@ -1,0 +1,17 @@
+.customTable {
+    margin-top: 2em;
+}
+
+.button {
+    height: 3em;
+    width: 5em;
+}
+
+.table-row-custom {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+    vertical-align: middle;
+}

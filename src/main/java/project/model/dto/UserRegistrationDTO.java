@@ -3,62 +3,49 @@ package project.model.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
 public class UserRegistrationDTO {
-  @NotEmpty
-  @Size(min = 5, max = 20)
-  private String firstName;
-  @NotEmpty
-  @Size(min = 5, max = 20)
-  private String lastName;
-  @NotEmpty
-  private String password;
-  @NotEmpty
-  @Email
-  private String email;
-  public String getFirstName() {
-    return firstName;
-  }
+    @NotEmpty
+    @Size(min = 5, max = 20)
+    @Getter
+    @Setter
+    private String firstName;
 
-  public UserRegistrationDTO setFirstName(String firstName) {
-    this.firstName = firstName;
-    return this;
-  }
+    @NotEmpty
+    @Size(min = 5, max = 20)
+    @Getter
+    @Setter
+    private String lastName;
 
-  public String getLastName() {
-    return lastName;
-  }
+    @NotEmpty
+    @Getter
+    @Setter
+    private String password;
 
-  public UserRegistrationDTO setLastName(String lastName) {
-    this.lastName = lastName;
-    return this;
-  }
+    @NotEmpty
+    @Email
+    @Getter
+    @Setter
+    private String email;
 
-  public String getPassword() {
-    return password;
-  }
+    @Getter
+    @Setter
+    private String phone_Number;
 
-  public UserRegistrationDTO setPassword(String password) {
-    this.password = password;
-    return this;
-  }
+    @Getter
+    @Setter
+    private String Apartment;
 
-  public String getEmail() {
-    return email;
-  }
 
-  public UserRegistrationDTO setEmail(String email) {
-    this.email = email;
-    return this;
-  }
-
-  @Override
-  public String toString() {
-    return "UserRegistrationDTO{" +
-        "firstName='" + firstName + '\'' +
-        ", lastName='" + lastName + '\'' +
-        ", password='" + (password == null ? "N/A" : "[PROVIDED]") + '\'' +
-        ", email='" + email + '\'' +
-        '}';
-  }
+    @Override
+    public String toString() {
+        return "UserRegistrationDTO{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + (password == null ? "N/A" : "[PROVIDED]") + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

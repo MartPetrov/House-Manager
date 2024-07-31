@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.model.dto.BuildingDTO;
+import project.model.dto.UserInBuildingDTO;
 import project.model.dto.UserModeratorDTO;
 import project.model.dto.UserRegistrationDTO;
 import project.model.entity.BuildingEntity;
@@ -41,51 +42,6 @@ public class UserServiceImpl implements UserService {
         this.userRoleEntityService = userRoleEntityService;
     }
 
-//    @Override
-//    public String importPeople(String firstName, String lastName, String phoneNumber, Integer apartmentNumber) {
-//        UserEntity newPeople = new UserEntity(firstName, lastName, apartmentNumber);
-//        UserEntity byFirstNameAndSecondName = userRepository.findPeopleByFirst_nameAndSecond_name(firstName, lastName);
-//        if (phoneNumber != null && phoneNumber.startsWith("359")) {
-//            newPeople.setPhoneNumber(phoneNumber);
-//        } else {
-//            throw new IllegalArgumentException("Wrong Phone Number");
-//        }
-//        if (byFirstNameAndSecondName == null) {
-//            this.userRepository.save(newPeople);
-//            return SUCCESSFUL_IMPORT_PEOPLE + newPeople;
-//        }
-//        return USER_IS_IN_DATABASE;
-//    }
-
-//    @Override
-//    public List<UserEntity> findAllPeople() {
-//             return   this.userRepository.findAll().stream()
-//                        .sorted(Comparator.comparingInt(UserEntity::getApartmentNumber))
-//                        .toList();
-//    }
-//
-//    @Override
-//    public String findAllPeopleRest() {
-//        List<UserEntity> allPeopleCompareApartment =
-//                this.userRepository.findAll().stream()
-//                .sorted(Comparator.comparingInt(UserEntity::getApartmentNumber))
-//                .toList();
-//        StringBuilder sb = new StringBuilder();
-//        allPeopleCompareApartment.forEach(p -> sb.append(p.toStringRest()));
-//        return sb.toString();
-//    }
-//
-//
-//
-//    @Override
-//    public String deleteAllPeople(String password) {
-//        if (password.equals(MSP)) {
-//            this.userRepository.deleteAll();
-//            return DELETE_ALL_PEOPLE_FROM_DB;
-//        }
-//        return WRONG_PASSWORD;
-//    }
-
     @Override
     public void registerUser(UserRegistrationDTO userRegistration) {
         UserEntity newUser = map(userRegistration);
@@ -118,6 +74,37 @@ public class UserServiceImpl implements UserService {
         buildingRepository.save(buildingEntityFromRepo);
 
     }
+
+    @Override
+    public UserEntity findUserByEmail(String email) {
+        Optional<UserEntity> byEmail = this.userRepository.findByEmail(email);
+        if (byEmail.isEmpty()) {
+            throw new UserNotFoundException("User with email:" + email + " does not exist");
+        }
+        return byEmail.get();
+    }
+
+    @Override
+    public void addUserInBuilding(UserInBuildingDTO userDTO, BuildingDTO buildingDTO) {
+        Optional<UserEntity> userFromRepo = userRepository.findByEmail(userDTO.getEmail());
+        Optional<BuildingEntity> buildingEntity = buildingRepository.findBuildingEntitiesByAddress(buildingDTO.getCity(), buildingDTO.getStreet(), buildingDTO.getNumber());
+        if (buildingEntity.isEmpty()) {
+            throw new BuildingNotFoundException("This building is not registered");
+        } else if (userFromRepo.isEmpty()) {
+            throw new UserNotFoundException("User with email:" + userDTO.getEmail() + " does not exist");
+        } else if (buildingEntity.get().getUsers().stream().map(UserEntity::getEmail).toList().contains(userFromRepo.get().getEmail())) {
+            throw new UserAlreadyDoThat("User with email: " + userFromRepo.get().getEmail() + " is already user in this building");
+        }
+        UserEntity userEntity = userFromRepo.get();
+        BuildingEntity buildingEntityFromRepo = buildingEntity.get();
+        List<UserEntity> users = buildingEntityFromRepo.getUsers();
+        if (!userDTO.getApartmentNumber().isEmpty())  {
+            userEntity.setApartmentNumber(userDTO.getApartmentNumber());
+        }
+        users.add(userEntity);
+        buildingRepository.save(buildingEntityFromRepo);
+    }
+
 
     private UserEntity map(UserRegistrationDTO userRegistrationDTO) {
         UserEntity mappedEntity = modelMapper.map(userRegistrationDTO, UserEntity.class);

@@ -2,7 +2,10 @@ package project.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import project.model.dto.BuildingDTO;
 import project.model.entity.BillEntity;
 import project.model.entity.BuildingEntity;
@@ -16,14 +19,15 @@ import java.util.List;
 public class BuildingsController {
     private final BuildingService buildingService;
 
+
     public BuildingsController(BuildingService buildingService) {
         this.buildingService = buildingService;
     }
 
-    @ModelAttribute("registerDTO")
-    public BuildingDTO addBuildingDTO() {
-        return new BuildingDTO();
-    }
+//    @ModelAttribute("registerDTO")
+//    public BuildingDTO addBuildingDTO() {
+//        return new BuildingDTO();
+//    }
 
     @GetMapping("/add")
     public String addModerator() {
@@ -34,7 +38,6 @@ public class BuildingsController {
     public String register(BuildingDTO buildingDTO) {
 
         buildingService.addBuilding(buildingDTO);
-
         return "redirect:/";
     }
 
@@ -55,6 +58,7 @@ public class BuildingsController {
         model.addAttribute("bills", bills);
         model.addAttribute("moderators", moderators);
         model.addAttribute("currentBuilding", currentBuilding);
+        model.addAttribute("building_id", id);
         return "current-building";
     }
 
