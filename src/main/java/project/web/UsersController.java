@@ -36,5 +36,4 @@ public class UsersController {
         userService.removeUser(id, building_id);
         return "redirect:/building/" + building_id;
     }
-
 }

@@ -33,5 +33,4 @@ public class UserRegistrationDTO {
     @Getter
     @Setter
     private String phoneNumber;
-
 }

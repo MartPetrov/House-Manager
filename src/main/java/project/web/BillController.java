@@ -20,16 +20,21 @@ public class BillController {
     }
 
 
-//    @PostMapping("/add")
-//    public String register(BuildingDTO buildingDTO) {
-//
-////        buildingService.addBuilding(buildingDTO);
-//        return "redirect:/";
-//    }
-
     @GetMapping("/removeBill/{id}/{building_id}" )
     public String removeUserFromBuilding(@PathVariable(name="id") Long id, @PathVariable(name="building_id") Long building_id) {
         billService.removeBill(id, building_id);
         return "redirect:/building/" + building_id;
+
+
+
+    public BillController() {
+    }
+
+
+    @PostMapping("/add")
+    public String register(BuildingDTO buildingDTO) {
+
+//        buildingService.addBuilding(buildingDTO);
+        return "redirect:/";
     }
 }
