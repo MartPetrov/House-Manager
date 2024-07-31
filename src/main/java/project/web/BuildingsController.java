@@ -2,13 +2,15 @@ package project.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import project.model.dto.BuildingDTO;
 import project.model.entity.BillEntity;
 import project.model.entity.BuildingEntity;
 import project.model.entity.UserEntity;
 import project.service.BuildingService;
-import project.service.UserService;
 
 import java.util.List;
 
@@ -16,11 +18,10 @@ import java.util.List;
 @RequestMapping("/building")
 public class BuildingsController {
     private final BuildingService buildingService;
-    private final UserService userService;
 
-    public BuildingsController(BuildingService buildingService, UserService userService) {
+
+    public BuildingsController(BuildingService buildingService) {
         this.buildingService = buildingService;
-        this.userService = userService;
     }
 
 //    @ModelAttribute("registerDTO")
@@ -60,14 +61,5 @@ public class BuildingsController {
         model.addAttribute("building_id", id);
         return "current-building";
     }
-
-    @GetMapping("/addUserInBuilding" )
-    public String addUserInBuilding() {
-
-
-              return "addUserInBuilding";
-    }
-
-
 
 }

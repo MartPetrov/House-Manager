@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.model.dto.BuildingDTO;
+import project.model.dto.UserInBuildingDTO;
 import project.model.dto.UserModeratorDTO;
 import project.model.dto.UserRegistrationDTO;
 import project.model.entity.BuildingEntity;
@@ -81,6 +82,27 @@ public class UserServiceImpl implements UserService {
             throw new UserNotFoundException("User with email:" + email + " does not exist");
         }
         return byEmail.get();
+    }
+
+    @Override
+    public void addUserInBuilding(UserInBuildingDTO userDTO, BuildingDTO buildingDTO) {
+        Optional<UserEntity> userFromRepo = userRepository.findByEmail(userDTO.getEmail());
+        Optional<BuildingEntity> buildingEntity = buildingRepository.findBuildingEntitiesByAddress(buildingDTO.getCity(), buildingDTO.getStreet(), buildingDTO.getNumber());
+        if (buildingEntity.isEmpty()) {
+            throw new BuildingNotFoundException("This building is not registered");
+        } else if (userFromRepo.isEmpty()) {
+            throw new UserNotFoundException("User with email:" + userDTO.getEmail() + " does not exist");
+        } else if (buildingEntity.get().getUsers().stream().map(UserEntity::getEmail).toList().contains(userFromRepo.get().getEmail())) {
+            throw new UserAlreadyDoThat("User with email: " + userFromRepo.get().getEmail() + " is already user in this building");
+        }
+        UserEntity userEntity = userFromRepo.get();
+        BuildingEntity buildingEntityFromRepo = buildingEntity.get();
+        List<UserEntity> users = buildingEntityFromRepo.getUsers();
+        if (!userDTO.getApartmentNumber().isEmpty())  {
+            userEntity.setApartmentNumber(userDTO.getApartmentNumber());
+        }
+        users.add(userEntity);
+        buildingRepository.save(buildingEntityFromRepo);
     }
 
 
