@@ -3,6 +3,7 @@ package project.service;
 import project.model.dto.BuildingDTO;
 import project.model.dto.UserModeratorDTO;
 import project.model.dto.UserRegistrationDTO;
+import project.model.entity.UserEntity;
 
 public interface UserService {
 
@@ -17,6 +18,8 @@ public interface UserService {
     void registerUser(UserRegistrationDTO userRegistration);
 
     void addModerator(UserModeratorDTO userModerator, BuildingDTO buildingDTO);
+
+    UserEntity findUserByEmail(String email);
 
 }
 

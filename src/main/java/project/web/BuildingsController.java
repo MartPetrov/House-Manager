@@ -8,22 +8,26 @@ import project.model.entity.BillEntity;
 import project.model.entity.BuildingEntity;
 import project.model.entity.UserEntity;
 import project.service.BuildingService;
+import project.service.UserService;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/building")
 public class BuildingsController {
     private final BuildingService buildingService;
+    private final UserService userService;
 
-    public BuildingsController(BuildingService buildingService) {
+    public BuildingsController(BuildingService buildingService, UserService userService) {
         this.buildingService = buildingService;
+        this.userService = userService;
     }
 
-    @ModelAttribute("registerDTO")
-    public BuildingDTO addBuildingDTO() {
-        return new BuildingDTO();
-    }
+//    @ModelAttribute("registerDTO")
+//    public BuildingDTO addBuildingDTO() {
+//        return new BuildingDTO();
+//    }
 
     @GetMapping("/add")
     public String addModerator() {
@@ -34,7 +38,6 @@ public class BuildingsController {
     public String register(BuildingDTO buildingDTO) {
 
         buildingService.addBuilding(buildingDTO);
-
         return "redirect:/";
     }
 
@@ -55,7 +58,18 @@ public class BuildingsController {
         model.addAttribute("bills", bills);
         model.addAttribute("moderators", moderators);
         model.addAttribute("currentBuilding", currentBuilding);
+        model.addAttribute("building_id", id);
         return "current-building";
     }
+
+    @GetMapping("/{building_id}/addUser")
+    public String findBuildingByIdAndAddUser(@PathVariable("building_id") Long id,
+            Model model) {
+        BuildingEntity currentBuilding = this.buildingService.findBuildingById(id);
+        model.addAttribute("currentBuilding", currentBuilding);
+        return "add-user-in-building";
+    }
+
+
 
 }

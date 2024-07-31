@@ -44,6 +44,10 @@
                         <td th:text="${user.getPhoneNumber()}" style="width: 35%">{PhoneNumber}</td>
                     </tr>
                 </table>
+                <button class="btn-dark" onclick="window.open(this.getAttribute('data-url'))"
+                        th:data-url="@{http://localhost:8080/building/{building_id}(building_id=${currentBuilding.getId()})/addUser}">
+                    Add User
+                </button>
             </li>
         </ul>
     </div>
