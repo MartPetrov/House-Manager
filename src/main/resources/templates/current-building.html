@@ -79,10 +79,10 @@
                     <td th:text="${bill.getDate()}"
                         style="width: 15%">{Date}
                     </td>
-                    <td th:text="${bill.getFirstNumber()}" style="width: 20%">{FirstNumber}</td>
+                    <td th:text="${bill.getNoteNumber()}" style="width: 20%">{FirstNumber}</td>
                     <td th:text="${bill.getMonth()}" style="width: 20%">{Month}</td>
                     <td th:text="${bill.getSum()}" style="width: 10%">{Sum}</td>
-                    <td th:text="${bill.getTypeOfBill()}" style="width: 35%">{TypeOfBill}</td>
+                    <td th:text="${bill.getType()}" style="width: 35%">{TypeOfBill}</td>
                     <td sec:authorize="hasRole('MODERATOR')">
                         <a th:href="@{'/bill/removeBill/' + ${bill.getId()} + '/' + ${currentBuilding.getId()}}"
                            th:data-confirm-delete="|Are you sure you want to this bill from ${bill.getDate()}?|"

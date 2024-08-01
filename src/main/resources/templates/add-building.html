@@ -15,7 +15,7 @@
 <div th:replace="~{fragments/navbar::navbar(activeLink=${'login'})}"></div>
 
 <div class="container">
-    <h2 class="text-center text-white">Add Building</h2>
+    <h2 class="text-center text-danger">Add Building</h2>
     <form th:method="post"
           th:action="@{/building/add}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
@@ -36,12 +36,12 @@
                    placeholder="Street"/>
         </div>
         <div class="form-group">
-            <label for="buildingNumber" class="text-white font-weight-bold">Number/№</label>
-            <input id="buildingNumber"
-                   name="buildingNumber"
+            <label for="number" class="text-white font-weight-bold">Number/№</label>
+            <input id="number"
+                   name="number"
                    type="text"
                    class="form-control"
-                   placeholder="Number"/>
+                   placeholder="number"/>
         </div>
         <div class="row">
             <div class="col col-md-4">

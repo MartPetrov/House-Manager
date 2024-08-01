@@ -15,12 +15,12 @@
 <div th:replace="~{fragments/navbar::navbar(activeLink=${'login'})}"></div>
 
 <div class="container">
-    <h2 class="text-center text-white">Login</h2>
+    <h2 class="text-center text-danger">Add bill for building</h2>
     <form th:method="post"
           th:action="@{/bill/addBill}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="form-group">
-            <label for="city" class="text-white font-weight-bold">City</label>
+            <label for="city" class="text-white font-weight-bold"></label>
             <input id="city"
                    name="city"
                    type="text"
@@ -28,7 +28,7 @@
                    placeholder="City"/>
         </div>
         <div class="form-group">
-            <label for="street" class="text-white font-weight-bold">Street</label>
+            <label for="street" class="text-white font-weight-bold"></label>
             <input id="street"
                    name="street"
                    type="text"
@@ -36,7 +36,7 @@
                    placeholder="Street"/>
         </div>
         <div class="form-group">
-            <label for="number" class="text-white font-weight-bold">Number/№</label>
+            <label for="number" class="text-white font-weight-bold"></label>
             <input id="number"
                    name="number"
                    type="text"
@@ -44,7 +44,7 @@
                    placeholder="Number"/>
         </div>
         <div class="form-group">
-            <label for="date" class="text-white font-weight-bold">Date</label>
+            <label for="date" class="text-white font-weight-bold"></label>
             <input id="date"
                    name="date"
                    type="text"
@@ -52,7 +52,7 @@
                    placeholder="Date"/>
         </div>
         <div class="form-group">
-            <label for="noteNumber" class="text-white font-weight-bold">noteNumber</label>
+            <label for="noteNumber" class="text-white font-weight-bold"></label>
             <input id="noteNumber"
                    name="noteNumber"
                    type="text"
@@ -60,7 +60,7 @@
                    placeholder="noteNumber"/>
         </div>
         <div class="form-group">
-            <label for="month" class="text-white font-weight-bold">Month</label>
+            <label for="month" class="text-white font-weight-bold"></label>
             <input id="month"
                    name="month"
                    type="text"
@@ -68,7 +68,7 @@
                    placeholder="Month"/>
         </div>
         <div class="form-group">
-            <label for="sum" class="text-white font-weight-bold">Sum</label>
+            <label for="sum" class="text-white font-weight-bold"></label>
             <input id="sum"
                    name="sum"
                    type="number"
@@ -78,7 +78,7 @@
         </div>
         <div class="form-group">
         <form>
-            <label for="type" class="text-white font-weight-bold">Type>
+            <label for="type" class="text-white font-weight-bold">Type
                 <select id="type" name="type">
                     <option value="ELECTRICITY">ELECTRICITY</option>
                     <option value="WATER">WATER</option>
