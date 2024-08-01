@@ -28,7 +28,5 @@ logging:
         SQL: off
       nodeValue: WARN
     blog: WARN
-  file:
-    name: ${cloud_path}
 server:
   port: 8080

@@ -56,7 +56,6 @@ public class BuildingServiceImpl implements BuildingService {
         BuildingEntity currentBuilding = byId.get();
         boolean contains = allMyBuildings.stream().anyMatch(buildingDTO -> buildingDTO.getId().equals(id));
         if (!contains) {
-            //TODO: add currentUserId
             logger.info("User is trying to access a building that is not his");
             throw new UnsupportedOperationException("""
                     Don't do that!!! :)

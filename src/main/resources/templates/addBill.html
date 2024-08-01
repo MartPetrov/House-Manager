@@ -17,16 +17,8 @@
 <div class="container">
     <h2 class="text-center text-white">Login</h2>
     <form th:method="post"
-          th:action="@{bill/addBill}"
+          th:action="@{/bill/addBill}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
-        <div class="form-group">
-            <label for="UserEmail" class="text-white font-weight-bold">UserEmail</label>
-            <input id="UserEmail"
-                   name="email"
-                   type="text"
-                   class="form-control"
-                   placeholder="UserEmail"/>
-        </div>
         <div class="form-group">
             <label for="city" class="text-white font-weight-bold">City</label>
             <input id="city"
@@ -51,12 +43,60 @@
                    class="form-control"
                    placeholder="Number"/>
         </div>
-        <div class="row">
-            <div class="col col-md-4">
-                <div class="button-holder d-flex">
-                    <input type="submit" class="btn btn-info btn-lg" value="Add User in Building"/>
+        <div class="form-group">
+            <label for="date" class="text-white font-weight-bold">Date</label>
+            <input id="date"
+                   name="date"
+                   type="text"
+                   class="form-control"
+                   placeholder="Date"/>
+        </div>
+        <div class="form-group">
+            <label for="noteNumber" class="text-white font-weight-bold">noteNumber</label>
+            <input id="noteNumber"
+                   name="noteNumber"
+                   type="text"
+                   class="form-control"
+                   placeholder="noteNumber"/>
+        </div>
+        <div class="form-group">
+            <label for="month" class="text-white font-weight-bold">Month</label>
+            <input id="month"
+                   name="month"
+                   type="text"
+                   class="form-control"
+                   placeholder="Month"/>
+        </div>
+        <div class="form-group">
+            <label for="sum" class="text-white font-weight-bold">Sum</label>
+            <input id="sum"
+                   name="sum"
+                   type="number"
+                   step=".01"
+                   class="form-control"
+                   placeholder="sum"/>
+        </div>
+        <div class="form-group">
+        <form>
+            <label for="type" class="text-white font-weight-bold">Type>
+                <select id="type" name="type">
+                    <option value="ELECTRICITY">ELECTRICITY</option>
+                    <option value="WATER">WATER</option>
+                    <option value="HEATING">HEATING</option>
+                    <option value="GAS">GAS</option>
+                    <option value="INTERNET">INTERNET</option>
+                    <option value="TV">TV</option>
+                    <option value="OTHER">OTHER</option>
+                </select>
+            </label>
+            <div class="row">
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex">
+                        <input type="submit" class="btn btn-info btn-lg" value="Add Bill for Building"/>
+                    </div>
                 </div>
             </div>
+        </form>
         </div>
     </form>
 </div>

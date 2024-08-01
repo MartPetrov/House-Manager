@@ -1,8 +1,9 @@
 package project.model.entity;
 
-import com.google.gson.Gson;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 import project.model.enums.TypeOfBill;
 
 import javax.validation.constraints.Max;
@@ -25,10 +26,8 @@ public class BillEntity {
 
     @Column
     @NonNull
-    private String firstNumber;
+    private String noteNumber;
 
-    @Column
-    private String secondNumber;
 
     @Column
     @NonNull
@@ -41,12 +40,10 @@ public class BillEntity {
     @Column()
     @NonNull
     @Enumerated(EnumType.STRING)
-    private TypeOfBill typeOfBill;
+    private TypeOfBill type;
 
-    public BillEntity() {}
-
- @Override
-    public String toString() {
-        return new Gson().toJson(this);
+    public BillEntity() {
     }
 }
+
+

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import project.model.dto.BillDTO;
 import project.model.dto.BuildingDTO;
 import project.service.BillService;
 
@@ -24,10 +25,14 @@ public class BillController {
         billService.removeBill(id, building_id);
         return "redirect:/building/" + building_id;
     }
-    @PostMapping("/add")
-    public String register(BuildingDTO buildingDTO) {
+    @PostMapping("/addBill")
+    public String addBill(BillDTO billDTO, BuildingDTO buildingDTO) {
+        billService.addBill(billDTO, buildingDTO);
+        return "redirect:/building/my";
+    }
 
-//        buildingService.addBuilding(buildingDTO);
-        return "redirect:/";
+    @GetMapping("/addBill")
+    public String addBill() {
+        return "addBill";
     }
 }
