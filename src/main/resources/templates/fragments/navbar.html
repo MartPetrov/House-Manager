@@ -37,17 +37,16 @@
                     <a class="nav-link" href="/building/my" th:classappend="${activeLink == 'my-building'}? 'active'"
                        th:text="#{nav_bar_my_buildings}">My Buildings</a>
                 </li>
-                <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
+                <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
                     <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                        th:text="#{nav_bar_admin_panel}">
                         Admin
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/moderators/add">Add Moderator</a>
-                        <a class="dropdown-item" href="/building/add">Add Building</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/">Something else here</a>
+                        <a class="dropdown-item" href="/moderators/add" th:text="#{nav_bar_add_moderator}" sec:authorize="hasRole('ADMIN')">Add Moderator</a>
+                        <a class="dropdown-item" href="/building/add" th:text="#{nav_bar_add_building}" sec:authorize="hasRole('ADMIN')">Add Building</a>
+                        <a class="dropdown-item" href="/moderators/admin/add" th:text="#{nav_bar_add_admin}">Add Admin</a>
                     </div>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
