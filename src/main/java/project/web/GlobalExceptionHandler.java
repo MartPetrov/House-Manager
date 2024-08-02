@@ -5,10 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
-import project.service.exception.BuildingNotFoundException;
-import project.service.exception.ObjectNotFoundException;
-import project.service.exception.UserAlreadyDoThat;
-import project.service.exception.UserNotFoundException;
+import project.service.exception.*;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {

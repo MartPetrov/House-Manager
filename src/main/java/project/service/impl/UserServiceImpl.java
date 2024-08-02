@@ -6,12 +6,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import project.model.dto.BuildingDTO;
-import project.model.dto.UserInBuildingDTO;
-import project.model.dto.UserModeratorDTO;
-import project.model.dto.UserRegistrationDTO;
+import project.model.dto.*;
 import project.model.entity.BuildingEntity;
 import project.model.entity.UserEntity;
+import project.model.entity.UserRoleEntity;
 import project.model.enums.UserRoleEnum;
 import project.repositories.BuildingRepository;
 import project.repositories.UserRepository;
@@ -22,7 +20,6 @@ import project.service.exception.UserAlreadyDoThat;
 import project.service.exception.UserNotFoundException;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -126,6 +123,25 @@ public class UserServiceImpl implements UserService {
             }
             buildingRepository.save(currentBuilding);
         }
+    }
+
+    @Override
+    public void addAdmin(UserAdminDTO userAdminDTO) {
+        Optional<UserEntity> userFromRepo = userRepository.findByEmail(userAdminDTO.getEmail());
+        if (!userAdminDTO.getPassword().equals("topsecret")) {
+            throw new UnsupportedOperationException("You don't have permission to do that");
+        }
+         if (userFromRepo.isEmpty()) {
+            throw new UserNotFoundException("User with email:" + userAdminDTO.getEmail() + " does not exist");
+        }
+        UserEntity userEntity = userFromRepo.get();
+        List<UserRoleEntity> currentRoles = userEntity.getRoles();
+        long count = currentRoles.stream().filter(r -> r.getRole().equals(UserRoleEnum.ADMIN)).count();
+        if (count != 0) {
+            throw new UserAlreadyDoThat("User with email: " + userFromRepo.get().getEmail() + " is already admin");
+        }
+        currentRoles.add(this.userRoleEntityService.findUserRolesByRole(UserRoleEnum.ADMIN));
+        userRepository.save(userEntity);
     }
 
 

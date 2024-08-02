@@ -1,9 +1,6 @@
 package project.service;
 
-import project.model.dto.BuildingDTO;
-import project.model.dto.UserInBuildingDTO;
-import project.model.dto.UserModeratorDTO;
-import project.model.dto.UserRegistrationDTO;
+import project.model.dto.*;
 import project.model.entity.UserEntity;
 
 public interface UserService {
@@ -17,5 +14,7 @@ public interface UserService {
     void addUserInBuilding(UserInBuildingDTO userDTO, BuildingDTO buildingDTO);
 
     void removeUser(Long id, Long building_id);
+
+    void addAdmin(UserAdminDTO userAdminDTO);
 }
 
