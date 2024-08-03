@@ -16,15 +16,9 @@ import java.lang.reflect.Method;
 @Component
 public class MonitoringAspect {
 
-
     private static final Logger LOGGER = LoggerFactory.getLogger(MonitoringAspect.class);
 
-
-    @Pointcut("@annotation(WarnIfExecutionExceeds)")
-    void onWarnIfExecutionTimeExceeds() {
-    }
-
-    @Around("onWarnIfExecutionTimeExceeds()")
+    @Around("Pointcuts.onWarnIfExecutionTimeExceeds()")
     Object monitorExecutionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         WarnIfExecutionExceeds annotation = getAnnotation(proceedingJoinPoint);
         long limitMillis = annotation.limitMillis();
@@ -42,9 +36,9 @@ public class MonitoringAspect {
     }
 
     private static WarnIfExecutionExceeds getAnnotation(ProceedingJoinPoint proceedingJoinPoint) {
-       Method method = ((MethodSignature)proceedingJoinPoint.getSignature()).getMethod();
+        Method method = ((MethodSignature) proceedingJoinPoint.getSignature()).getMethod();
 
-       return method.getAnnotation(WarnIfExecutionExceeds.class);
+        return method.getAnnotation(WarnIfExecutionExceeds.class);
     }
 
 }
