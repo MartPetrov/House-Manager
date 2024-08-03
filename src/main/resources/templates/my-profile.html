@@ -15,7 +15,7 @@
 <div class="col-5 my-buildings">
     <div class="bg-dark rounded m-auto" style="height: 90vh; overflow: auto">
         <h3 th:text="|My Profile: ${currentUser.getFullName()}|"
-            class="text-danger  mb-0 mt-2 ui-front">My Buildings ({count})</h3>
+            class="text-warning  mb-0 mt-2 ui-front"></h3>
         <form th:method="post"
                 th:action="@{/users/my-profile}"
               class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
@@ -55,12 +55,14 @@
                        placeholder="phoneNumber"/>
             </div>
             <div class="row">
-                <div class="col col-md-4">
+                <div class="align-content-center">
                     <div class="button-holder d-flex">
                         <input type="submit" class="btn btn-info btn-lg" value="Update profile"/>
                     </div>
                 </div>
+                <h6 class="text-warning  mb-0 mt-2 ui-front">If you update your profile, you will be ask for login again!!!</h6>
             </div>
+
         </form>
     </div>
 </div>
