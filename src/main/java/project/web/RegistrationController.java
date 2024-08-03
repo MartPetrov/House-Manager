@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import project.model.dto.UserRegistrationDTO;
 import project.service.UserService;
+import project.web.aop.WarnIfExecutionExceeds;
 
 @Controller
 @RequestMapping("/users")
@@ -24,11 +25,17 @@ public class RegistrationController {
   }
 
   @GetMapping("/register")
+  @WarnIfExecutionExceeds(
+          limitMillis = 1000
+  )
   public String register() {
     return "auth-register";
   }
 
   @PostMapping("/register")
+  @WarnIfExecutionExceeds(
+          limitMillis = 800
+  )
   public String register(UserRegistrationDTO registerDTO) {
 
     userService.registerUser(registerDTO);
