@@ -1,11 +1,20 @@
 package project.web;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.boot.Banner;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import project.model.dto.BuildingDTO;
 import project.model.dto.UserInBuildingDTO;
+import project.model.dto.UserUpdateDto;
+import project.model.user.HouseManagerUserDetails;
 import project.service.UserService;
+import project.service.exception.UserNotFoundException;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/users")
@@ -17,8 +26,21 @@ public class UsersController {
     }
 
     @GetMapping("/my-profile")
-    public String showProfile() {
+    public String myProfile(Model model) {
+        Optional<HouseManagerUserDetails> currentUser = userService.getCurrentUser();
+        if (currentUser.isEmpty()) {
+            throw new UserNotFoundException("User not found");
+        }
+        HouseManagerUserDetails houseManagerUserDetails = currentUser.get();
+        model.addAttribute("currentUser", houseManagerUserDetails);
         return "my-profile";
+    }
+
+    @PostMapping("/my-profile")
+    public String updateUser(UserUpdateDto userDTO) {
+        userService.updateUser(userDTO);
+        SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
+        return "redirect:/users/login";
     }
 
     @GetMapping("/addUserInBuilding" )

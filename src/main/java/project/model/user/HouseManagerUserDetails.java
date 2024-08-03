@@ -11,17 +11,22 @@ public class HouseManagerUserDetails extends User {
 
   private final String firstName;
   private final String lastName;
+  private final String email;
+  private final String phoneNumber;
 
   public HouseManagerUserDetails(
-      String username,
-      String password,
-      Collection<? extends GrantedAuthority> authorities,
-      String firstName,
-      String lastName
+          String username,
+          String password,
+          Collection<? extends GrantedAuthority> authorities,
+          String firstName,
+          String lastName,
+          String email, String phoneNumber
   ) {
     super(username, password, authorities);
     this.firstName = firstName;
     this.lastName = lastName;
+    this.email = email;
+    this.phoneNumber = phoneNumber;
   }
 
     public String getFullName() {

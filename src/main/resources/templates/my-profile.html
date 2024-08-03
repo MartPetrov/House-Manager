@@ -2,9 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>House-Manager</title>
+    <link rel="stylesheet" href="/css/reset.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/mainPage.css"/>
+    <script src="/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div th:replace="~{fragments/navbar::navbar(activeLink=${'login'})}"></div>
+
+<div class="col-5 my-buildings">
+    <div class="bg-dark rounded m-auto" style="height: 90vh; overflow: auto">
+        <h3 th:text="|My Profile: ${currentUser.getFullName()}|"
+            class="text-danger  mb-0 mt-2 ui-front">My Buildings ({count})</h3>
+        <form th:method="post"
+                th:action="@{/users/my-profile}"
+              class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+            <div class="form-group">
+                <label for="email" class="text-white font-weight-bold">UserEmail</label>
+                <input id="email"
+                       name="email"
+                       type="text"
+                       class="form-control"
+                       th:value="${currentUser.getEmail()}"/>
+            </div>
+            <div class="form-group">
+                <label for="firstName" class="text-white font-weight-bold">First Name</label>
+                <input th:value="${currentUser.getFirstName()}"
+                       id="firstName"
+                       name="firstName"
+                       type="text"
+                       class="form-control"
+                       placeholder="First name"/>
+            </div>
+            <div class="form-group">
+                <label for="lastName" class="text-white font-weight-bold">Last Name</label>
+                <input th:value="${currentUser.getLastName()}"
+                       id="lastName"
+                       name="lastName"
+                       type="text"
+                       class="form-control"
+                       placeholder="Last name"/>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber" class="text-white font-weight-bold">phoneNumber</label>
+                <input th:value="${currentUser.getPhoneNumber()}"
+                       id="phoneNumber"
+                       name="phoneNumber"
+                       type="text"
+                       class="form-control"
+                       placeholder="phoneNumber"/>
+            </div>
+            <div class="row">
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex">
+                        <input type="submit" class="btn btn-info btn-lg" value="Update profile"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 </body>
 </html>

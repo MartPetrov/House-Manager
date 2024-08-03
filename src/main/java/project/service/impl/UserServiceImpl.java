@@ -3,6 +3,9 @@ package project.service.impl;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +15,7 @@ import project.model.entity.BuildingEntity;
 import project.model.entity.UserEntity;
 import project.model.entity.UserRoleEntity;
 import project.model.enums.UserRoleEnum;
+import project.model.user.HouseManagerUserDetails;
 import project.repositories.BuildingRepository;
 import project.repositories.UserRepository;
 import project.service.UserRoleEntityService;
@@ -144,6 +148,50 @@ public class UserServiceImpl implements UserService {
         }
         currentRoles.add(this.userRoleEntityService.findUserRolesByRole(UserRoleEnum.ADMIN));
         userRepository.save(userEntity);
+    }
+
+    @Override
+    public Optional<HouseManagerUserDetails> getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof  HouseManagerUserDetails houseManagerUserDetails) {
+            return Optional.of(houseManagerUserDetails);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public void updateUser(UserUpdateDto userDTO) {
+        Optional<HouseManagerUserDetails> currentUser = getCurrentUser();
+        if (currentUser.isEmpty()) {
+            throw new UserNotFoundException("User is not present");
+        }
+        HouseManagerUserDetails houseManagerUserDetailsCurrentUser = currentUser.get();
+        boolean haveChanges = checkForChanges(houseManagerUserDetailsCurrentUser, userDTO);
+
+        if (haveChanges) {
+            Optional<UserEntity> userByEmail = userRepository.findByEmail(houseManagerUserDetailsCurrentUser.getEmail());
+            if (userByEmail.isEmpty()) {
+                throw new UserNotFoundException("User is not present in DB");
+            }
+            UserEntity userEntity = userByEmail.get();
+            userEntity.setEmail(userDTO.getEmail());
+            userEntity.setFirstName(userDTO.getFirstName());
+            userEntity.setLastName(userDTO.getLastName());
+            userEntity.setPhoneNumber(userDTO.getPhoneNumber());
+            this.userRepository.save(userEntity);
+            logger.info("User with id: {} was updated",userEntity.getId());
+        }
+    }
+
+    private boolean checkForChanges(HouseManagerUserDetails currentUser, UserUpdateDto userDTO) {
+        return checkForDiffField(currentUser.getEmail(),userDTO.getEmail())
+         || checkForDiffField(currentUser.getFirstName(),userDTO.getFirstName())
+                || checkForDiffField(currentUser.getLastName(),userDTO.getLastName())
+                || checkForDiffField(currentUser.getPhoneNumber(), userDTO.getPhoneNumber());
+    }
+
+    private boolean checkForDiffField(String fieldOfCurrentUser, String fieldOfDTOObject) {
+        return !Objects.equals(fieldOfCurrentUser, fieldOfDTOObject);
     }
 
 
