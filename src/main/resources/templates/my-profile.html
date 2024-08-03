@@ -15,7 +15,7 @@
 <div class="col-5 my-buildings">
     <div class="bg-dark rounded m-auto" style="height: 90vh; overflow: auto">
         <h3 th:text="|My Profile: ${currentUser.getFullName()}|"
-            class="text-warning  mb-0 mt-2 ui-front"></h3>
+            class="text-danger ui-front"></h3>
         <form th:method="post"
                 th:action="@{/users/my-profile}"
               class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
