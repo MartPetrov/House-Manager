@@ -43,7 +43,7 @@ public class HouseManagerUserDetailsService implements UserDetailsService {
         );
     }
 
-    private static GrantedAuthority map(UserRoleEnum role) {
+    static GrantedAuthority map(UserRoleEnum role) {
         return new SimpleGrantedAuthority(
                 "ROLE_" + role
         );

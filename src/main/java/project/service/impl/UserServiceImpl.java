@@ -114,6 +114,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void removeUser(Long id, Long building_id) {
+        if (id == null) {
+            throw new UnsupportedOperationException("User id is null");
+        }
         Optional<BuildingEntity> buildingEntity = buildingRepository.findById(building_id);
         if (buildingEntity.isPresent()) {
             BuildingEntity currentBuilding = buildingEntity.get();

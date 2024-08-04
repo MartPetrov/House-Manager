@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Weather Forecast</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5" id="city-name">Weather Forecast</h1>
+    <table class="table table-striped mt-3" id="weather-table">
+        <thead>
+        <tr>
+            <th>Day</th>
+            <th>Condition</th>
+            <th>Min Temperature (°C)</th>
+            <th>Max Temperature (°C)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Weather data will be injected here -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: 'http://localhost:8081/findForecastsByCity?city=',
+            method: 'GET',
+            success: function(data) {
+                var cityName = data[0].city;
+                $('#city-name').text('Weather Forecast for ' + cityName);
+
+                data.forEach(function(weather) {
+                    var row = '<tr>' +
+                        '<td>' + weather.day + '</td>' +
+                        '<td>' + weather.condition + '</td>' +
+                        '<td>' + weather.minTemperature + '</td>' +
+                        '<td>' + weather.maxTemperature + '</td>' +
+                        '</tr>';
+                    $('#weather-table tbody').append(row);
+                });
+            },
+            error: function(error) {
+                console.log('Error fetching weather data:', error);
+            }
+        });
+    });
+</script>
+</body>
+</html>

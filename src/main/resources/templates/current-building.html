@@ -16,7 +16,7 @@
 <div th:replace="~{fragments/navbar::navbar(activeLink=${'login'})}"></div>
 
 <div class="col-5 my-buildings">
-    <div class="bg-dark rounded m-auto tab-content customTable" style="width:  auto; overflow: auto">
+    <div class="bg-dark rounded m-auto tab-content customTable" style="width:  150vh; overflow: auto">
         <h3 th:text="|Current Building: ${currentBuilding.getCity()} ${currentBuilding.getStreet()} ${currentBuilding.getNumber()}|"
             class="text-white  mb-0 mt-2 ui-front">CurrentBuilding</h3>
         <h3>
@@ -56,13 +56,13 @@
             <a th:href="@{http://localhost:8080/users/addUserInBuilding}">
                 <button type="button" class="bg-warning text-dark button"> Add User </button>
             </a>
-            <a th:href="@{http://localhost:8081/weather}">
-                <button type="button" class="bg-warning text-dark button"> View Weather</button>
-            </a>
         </div>
+        <a th:href="@{'http://localhost:8081/findForecastsByCity?city=' + ${currentBuilding.getCity()}}">
+                <button type="button" class="bg-warning text-dark button"> View Weather</button>
+        </a>
     </div>
 
-    <div class="bg-dark rounded tab-content customTable" style="width:  80vh; overflow: auto">
+    <div class="bg-dark rounded tab-content customTable" style="width:  120vh; overflow: auto">
         <h3>
             <p align="center" class="bg-warning">
                 BILLS TABLE
