@@ -50,21 +50,18 @@
                     </div>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <div class="form-inline my-2 my-lg-0 border px-3">
-                        <div class="logged-user"
-                             text="Welcome, Gosho"></div>
-                        <form th:method="post"
-                              th:action="@{/users/logout}">
-                            <input class="btn btn-link" type="submit" value="Logout"/>
-                        </form>
-                    </div>
-                </li>
-                <li class="nav-item" sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/users/my-profile"
                        th:classappend="${activeLink == 'my-profile'}? 'active'"
                        th:text="#{nav_bar_my_profile}">My Profile</a>
                 </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <div class="logged-user"></div>
+                        <form th:method="post"
+                              th:action="@{/users/logout}">
+                            <input class="btn" type="submit" value="Logout"/>
+                        </form>
 
+                </li>
                 <li class="nav-item" sec:authorize="!isAuthenticated()">
                     <a class="nav-link" href="/users/register"
                        th:classappend="${activeLink == 'register'}? 'active'"
