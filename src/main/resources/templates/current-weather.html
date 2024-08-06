@@ -9,6 +9,9 @@
 <div class="container">
     <h1 class="mt-5" id="city-name">Weather Forecast</h1>
     <table class="table table-striped mt-3" id="weather-table">
+        <h3 th:text="|Current Weather: (${currentForecast.getId()}) ${currentBuilding.getStreet()} ${currentBuilding.getNumber()}|"
+            class="text-white  mb-0 mt-2 ui-front">CurrentBuilding</h3>
+        <h3>
         <thead>
         <tr>
             <th>Day</th>
@@ -18,35 +21,9 @@
         </tr>
         </thead>
         <tbody>
-        <!-- Weather data will be injected here -->
+
         </tbody>
     </table>
 </div>
-
-<script>
-    $(document).ready(function() {
-        $.ajax({
-            url: 'http://localhost:8081/findForecastsByCity?city=',
-            method: 'GET',
-            success: function(data) {
-                var cityName = data[0].city;
-                $('#city-name').text('Weather Forecast for ' + cityName);
-
-                data.forEach(function(weather) {
-                    var row = '<tr>' +
-                        '<td>' + weather.day + '</td>' +
-                        '<td>' + weather.condition + '</td>' +
-                        '<td>' + weather.minTemperature + '</td>' +
-                        '<td>' + weather.maxTemperature + '</td>' +
-                        '</tr>';
-                    $('#weather-table tbody').append(row);
-                });
-            },
-            error: function(error) {
-                console.log('Error fetching weather data:', error);
-            }
-        });
-    });
-</script>
 </body>
 </html>

@@ -57,7 +57,7 @@
                 <button type="button" class="bg-warning text-dark button"> Add User </button>
             </a>
         </div>
-        <a th:href="@{'http://localhost:8081/findForecastsByCity?city=' + ${currentBuilding.getCity()}}">
+        <a th:href="@{'http://localhost:8080/get-forecast?city=' + ${currentBuilding.getCity()}}">
                 <button type="button" class="bg-warning text-dark button"> View Weather</button>
         </a>
     </div>
