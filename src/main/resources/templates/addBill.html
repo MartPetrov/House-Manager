@@ -15,7 +15,7 @@
 <div th:replace="~{fragments/navbar::navbar(activeLink=${'login'})}"></div>
 
 <div class="container">
-    <h2 class="text-center text-danger">Add bill for building</h2>
+    <h2 class="text-center text-danger" th:text="#{nav_bar_add_bill}">Add bill for building</h2>
     <form th:method="post"
           th:action="@{/bill/addBill}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
