@@ -18,9 +18,9 @@ public class WeatherForecastDTO {
     private String city;
 
     @NotEmpty
-    private String minTemp;
+    private String minTemperature;
 
     @NotEmpty
-    private String maxTemp;
+    private String maxTemperature;
 
 }

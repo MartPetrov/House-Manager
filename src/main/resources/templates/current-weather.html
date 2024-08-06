@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Weather Forecast</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="UTF-8">
+    <title>House-Manager</title>
+    <link rel="stylesheet" href="/css/reset.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/mainPage.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/currentBuilding.css"/>
+    <script src="/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 </head>
 <body>
+
+<div th:replace="~{fragments/navbar::navbar(activeLink=${'login'})}"></div>
+
 <div class="container">
     <h1 class="mt-5" id="city-name">Weather Forecast</h1>
-    <table class="table table-striped mt-3" id="weather-table">
-        <h3 th:text="|Current Weather: (${currentForecast.getId()}) ${currentBuilding.getStreet()} ${currentBuilding.getNumber()}|"
-            class="text-white  mb-0 mt-2 ui-front">CurrentBuilding</h3>
-        <h3>
+    <h3 th:text="|Current Weather: (${currentForecast.getCity()})|"
+        class="text-dark  mb-0 mt-2 ui-front">CurrentBuilding
+    </h3>
+    <table class="table table-striped mt-3 table-dark text-warning" id="weather-table">
         <thead>
         <tr>
-            <th>Day</th>
-            <th>Condition</th>
             <th>Min Temperature (°C)</th>
             <th>Max Temperature (°C)</th>
         </tr>
         </thead>
         <tbody>
-
+        <tr>
+            <td th:text="${currentForecast.getMinTemperature()}" style="width: 20%">{MinTemperature}></td>
+            <td th:text="${currentForecast.getMaxTemperature()}" style="width: 20%">{MaxTemperature}></td>
+        </tr>
         </tbody>
     </table>
 </div>

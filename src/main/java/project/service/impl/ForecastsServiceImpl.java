@@ -1,10 +1,12 @@
 package project.service.impl;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import project.model.dto.WeatherForecastDTO;
 import project.service.ForecastsService;
-import reactor.core.publisher.Mono;
+
+import java.time.Duration;
 
 @Service
 public class ForecastsServiceImpl implements ForecastsService {
@@ -15,14 +17,14 @@ public class ForecastsServiceImpl implements ForecastsService {
         this.webClient = webClientBuilder.baseUrl("http://localhost:8081").build();
     }
 
-    public Mono<WeatherForecastDTO> getForecast(String city) {
+    public WeatherForecastDTO getForecast(String city) {
 
-        Mono<WeatherForecastDTO> forecastDTOMono = this.webClient.get()
+        WeatherForecastDTO forecastDTOMono = this.webClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/forecast")
                         .queryParam("city", city)
-                        .build())
+                        .build()).accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .bodyToMono(WeatherForecastDTO.class);
+                .bodyToMono(WeatherForecastDTO.class).block(Duration.ofSeconds(5));
 
 
         return forecastDTOMono;

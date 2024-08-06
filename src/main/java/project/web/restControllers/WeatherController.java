@@ -2,13 +2,14 @@
 package project.web.restControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import project.model.dto.WeatherForecastDTO;
 import project.service.ForecastsService;
-import reactor.core.publisher.Mono;
 
-@RestController
+@Controller
 public class WeatherController {
 
 
@@ -21,7 +22,7 @@ public class WeatherController {
 
     @GetMapping("/get-forecast")
     public String getForecast(@RequestParam String city, Model model) {
-        Mono<WeatherForecastDTO> forecast = forecastService.getForecast(city);
+        WeatherForecastDTO forecast = forecastService.getForecast(city);
         model.addAttribute("currentForecast", forecast);
         return "current-weather";
     }
