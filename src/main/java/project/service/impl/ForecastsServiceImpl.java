@@ -33,7 +33,6 @@ public class ForecastsServiceImpl implements ForecastsService {
                         Mono.error(new ObjectNotFoundException("Forecast for this city:  " + city, city)))
                 .bodyToMono(WeatherForecastDTO.class).block(Duration.ofSeconds(5));
 
-
         return forecastDTOMono;
     }
 }
