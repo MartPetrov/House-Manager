@@ -13,7 +13,7 @@
 <div th:replace="~{fragments/navbar::navbar(activeLink=${'login'})}"></div>
 
 <div class="col-5 my-buildings">
-    <div class="bg-dark rounded m-auto" style="height: 90vh; overflow: auto">
+    <div class="bg-dark rounded m-auto" style="height: 60vh; overflow: auto">
         <h3 th:text="|My Profile: ${currentUser.getFullName()}|"
             class="text-danger ui-front"></h3>
         <form th:method="post"
