@@ -4,7 +4,6 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -54,6 +53,7 @@ public class UserServiceImpl implements UserService {
         UserEntity newUser = map(userRegistration);
         newUser.getRoles().add(this.userRoleEntityService.findUserRolesByRole(UserRoleEnum.USER));
         userRepository.save(newUser);
+        logger.info("User registered successfully");
     }
 
     @Override
@@ -79,6 +79,7 @@ public class UserServiceImpl implements UserService {
         List<UserEntity> users = buildingEntityFromRepo.getUsers();
         users.add(userEntity);
         buildingRepository.save(buildingEntityFromRepo);
+        logger.info("User is moderator successfully");
 
     }
 
@@ -110,6 +111,7 @@ public class UserServiceImpl implements UserService {
         }
         users.add(userEntity);
         buildingRepository.save(buildingEntityFromRepo);
+        logger.info("User is added to building successfully");
     }
 
     @Override
@@ -151,6 +153,7 @@ public class UserServiceImpl implements UserService {
         }
         currentRoles.add(this.userRoleEntityService.findUserRolesByRole(UserRoleEnum.ADMIN));
         userRepository.save(userEntity);
+        logger.info("User has role admin successfully");
     }
 
     @Override
