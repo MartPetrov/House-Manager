@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import project.model.dto.BuildingDTO;
 import project.model.entity.BuildingEntity;
+import project.model.entity.UserEntity;
+import project.model.user.HouseManagerUserDetails;
 import project.repositories.BuildingRepository;
 import project.service.BuildingService;
 import project.service.exception.ObjectNotFoundException;
@@ -19,11 +21,13 @@ public class BuildingServiceImpl implements BuildingService {
 
     private final ModelMapper modelMapper;
     private final BuildingRepository buildingRepository;
+    private final UserServiceImpl userService;
     private final Logger logger = LoggerFactory.getLogger(BuildingServiceImpl.class);
 
-    public BuildingServiceImpl(ModelMapper modelMapper, BuildingRepository buildingRepository) {
+    public BuildingServiceImpl(ModelMapper modelMapper, BuildingRepository buildingRepository, UserServiceImpl userService) {
         this.modelMapper = modelMapper;
         this.buildingRepository = buildingRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -38,8 +42,15 @@ public class BuildingServiceImpl implements BuildingService {
     @Override
     public List<BuildingDTO> getAllMyBuildings() {
         logger.info("Getting all buildings");
+        Optional<HouseManagerUserDetails> currentUser = userService.getCurrentUser();
+        if (currentUser.isEmpty()) {
+            throw new ObjectNotFoundException("Don't found user", HouseManagerUserDetails.class);
+        }
+        HouseManagerUserDetails houseManagerUserDetails = currentUser.get();
+        UserEntity userByEmail = this.userService.findUserByEmail(houseManagerUserDetails.getEmail());
         List<BuildingDTO> collect = this.buildingRepository
-                .findBuildingEntitiesByUsersId(1)
+                //.findBuildingEntitiesByUsersId(1)
+                .findBuildingEntitiesByUsersId(userByEmail.getId())
                 .stream()
                 .map(this::map)
                 .collect(Collectors.toList());
